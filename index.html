@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan Estratégico de Seguridad Hídrica - Medellín 2026</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter para un look institucional tipo ONU/TNC -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
     <style>
@@ -18,9 +15,8 @@
             color: #0f172a;
         }
 
-        /* Hero Background - Usando la imagen del territorio */
         .hero-bg {
-            background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.6)), url('image_da4369.jpg');
+            background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.7)), url('image_da4369.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -35,17 +31,18 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 60px;
-            height: 4px;
+            width: 80px;
+            height: 5px;
             background-color: #059669;
+            border-radius: 5px;
         }
 
         .card-programa {
             transition: all 0.3s ease;
         }
         .card-programa:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.1);
             border-top-color: #059669;
         }
     </style>
@@ -55,194 +52,256 @@
     <!-- Navegación Institucional -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <!-- Logo CuencaVerde -->
+            <div class="flex items-center space-x-5">
                 <img src="CuencaVerde Logo.jpg" alt="CuencaVerde" class="h-12 object-contain">
-                <div class="h-8 w-px bg-slate-300"></div>
-                <!-- Logo Distrito de Medellín (NUEVO) -->
+                <div class="h-10 w-px bg-slate-300"></div>
                 <img src="logo_distritoMedellin.png" alt="Distrito de Medellín" class="h-14 object-contain">
             </div>
             <div class="hidden md:block">
-                <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-                    Propuesta 2026
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wider shadow-sm">
+                    Plan Maestro 2026
                 </span>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION (El Agua como Eje) -->
+    <!-- HERO SECTION -->
     <header class="hero-bg text-white py-32 px-6">
-        <div class="max-w-5xl mx-auto">
-            <span class="text-emerald-400 font-bold tracking-widest uppercase text-sm mb-4 block">Propuesta Técnica y Estratégica</span>
-            <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6">
-                Plan Estratégico de Seguridad Hídrica y Resiliencia Territorial
+        <div class="max-w-6xl mx-auto">
+            <span class="text-emerald-400 font-bold tracking-widest uppercase text-sm mb-4 block">Propuesta Técnica y Estratégica[cite: 7]</span>
+            <h1 class="text-5xl md:text-7xl font-black leading-tight mb-8">
+                Seguridad Hídrica y Resiliencia Territorial
             </h1>
-            <p class="text-xl md:text-2xl font-light text-slate-200 mb-10 max-w-3xl border-l-4 border-emerald-500 pl-6">
-                El agua como eje fundamental del desarrollo integral sostenible para Medellín y la Región Central de Antioquia.
+            <p class="text-xl md:text-2xl font-light text-slate-200 mb-10 max-w-3xl border-l-4 border-emerald-500 pl-6 leading-relaxed">
+                El agua como eje fundamental del desarrollo integral sostenible para el Distrito de Medellín y su área metropolitana[cite: 7].
             </p>
         </div>
     </header>
 
-    <!-- EL CONTEXTO Y LA CRISIS -->
-    <section class="py-20 px-6 bg-white">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-4xl font-bold text-slate-900 section-title mb-8">El Reto Estructural</h2>
-                <p class="text-lg text-slate-600 mb-6 leading-relaxed">
-                    Medellín y el Valle de Aburrá operan bajo una <strong>dependencia crítica de cuencas externas</strong> (Norte y Oriente). El agua es una necesidad vital que soporta nuestra industria, producción de energía y seguridad alimentaria.
-                </p>
-                <p class="text-lg text-slate-600 leading-relaxed">
-                    A nivel global, enfrentamos fenómenos climáticos extremos impulsados por el cambio climático (El Niño histórico). Según la ONU, estamos ingresando a una era de <strong>"bancarrota hídrica"</strong>; ya no es solo una crisis ambiental, es un riesgo económico primario para el territorio.
-                </p>
-            </div>
-            <div class="bg-slate-50 p-10 rounded-2xl border border-slate-200 shadow-inner">
-                <i data-feather="alert-triangle" class="w-12 h-12 text-amber-500 mb-6"></i>
-                <h3 class="text-2xl font-bold text-slate-900 mb-4">Gobernanza Adaptativa</h3>
-                <p class="text-slate-600 mb-6">
-                    La Seguridad Hídrica debe abordarse desde una visión integral: integridad ecosistémica, disponibilidad, gestión de riesgos y justicia hídrica. Las estrategias deben ser <strong>dinámicas y adaptativas</strong> frente a las variaciones climáticas.
-                </p>
-                <!-- Soporte Normativo -->
-                <div class="bg-emerald-900 text-white p-6 rounded-xl">
-                    <h4 class="font-bold flex items-center mb-2">
-                        <i data-feather="book-open" class="w-5 h-5 mr-2 text-emerald-400"></i> Mandato Normativo
-                    </h4>
-                    <p class="text-sm text-emerald-100">
-                        El <strong>Artículo 41 de la Ley 99 de 1993</strong> exige destinar al menos el 1% de los ingresos corrientes del Distrito para la adquisición y mantenimiento de áreas estratégicas abastecedoras.
+    <!-- EL CONTEXTO Y LA INTERDEPENDENCIA -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+                <div>
+                    <h2 class="text-4xl font-black text-slate-900 section-title mb-8">La Realidad Socioecológica</h2>
+                    <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                        Medellín y el Valle de Aburrá operan bajo una <strong>dependencia crítica de cuencas externas</strong> (Norte y Oriente). El agua es el insumo vital que soporta nuestra industria, la producción de energía y la seguridad alimentaria regional[cite: 7, 8].
                     </p>
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                        A nivel global, la ONU advierte sobre la entrada a una era de <strong>"bancarrota hídrica"</strong>. Con la intensificación de fenómenos climáticos extremos (como un Fenómeno de El Niño histórico), la inseguridad hídrica deja de ser un tema ambiental para convertirse en un riesgo económico primario[cite: 7, 8].
+                    </p>
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h4 class="font-bold flex items-center mb-2 text-slate-900">
+                            <i data-feather="book-open" class="w-5 h-5 mr-3 text-emerald-600"></i> Mandato Normativo y de Financiación
+                        </h4>
+                        <p class="text-sm text-slate-600">
+                            El <strong>Artículo 41 de la Ley 99 de 1993</strong> exige destinar al menos el 1% de los ingresos corrientes del Distrito para la adquisición y mantenimiento de áreas estratégicas abastecedoras. Este plan es el vehículo para ejecutarlo con rigor[cite: 7, 8].
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Esquema Altitudinal Integrado (IMAGEN 8) -->
+                <div>
+                    <img src="imagen 8.jpg" alt="Perfil Altitudinal de Medellín y Cuencas Externas" class="w-full rounded-2xl shadow-xl border border-slate-200">
+                    <p class="text-xs text-slate-400 mt-4 text-center font-medium uppercase tracking-wide">Esquema Altitudinal Integrado: Evidencia de las interdependencias del agua en la región.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- LOS 6 PROGRAMAS (La Solución) -->
-    <section class="py-24 px-6 bg-slate-100">
+    <!-- DEEP DIVE: LA CIENCIA DE LA RESTAURACIÓN (NUEVO BLOQUE VISUAL) -->
+    <section class="py-20 px-6 bg-slate-900 text-white border-t-8 border-emerald-600">
+        <div class="max-w-7xl mx-auto text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-black mb-4">El Impacto de la Solución (SbN)</h2>
+            <p class="text-xl text-slate-400 font-light max-w-3xl mx-auto">La diferencia entre un ecosistema degradado y uno restaurado determina la vulnerabilidad de Medellín frente a sequías e inundaciones extremas.</p>
+        </div>
+        
+        <div class="max-w-6xl mx-auto">
+            <!-- Gráfico Comparativo Before/After (SIN Y CON RIPARIOS) -->
+            <img src="Sin y Con Riparios.png" alt="Comparativa de Bosque Ripario Degradado vs Restaurado" class="w-full rounded-2xl shadow-2xl border border-slate-700">
+        </div>
+    </section>
+
+    <!-- LOS 6 PROGRAMAS ESTRATÉGICOS -->
+    <section class="py-24 px-6 bg-slate-50">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-slate-900 mb-4">Estructura Programática Integrada</h2>
-                <p class="text-xl text-slate-600 max-w-3xl mx-auto">
-                    6 programas diseñados bajo estándares internacionales para garantizar la sostenibilidad hídrica de Medellín, con una inversión estratégica de <strong>$14.000 Millones COP</strong>.
+                <h2 class="text-4xl font-black text-slate-900 mb-4">Estructura Programática Integrada</h2>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    6 programas diseñados bajo estándares internacionales para garantizar la seguridad hídrica, con una inversión estratégica focalizada de <strong>$14.000 Millones COP</strong>[cite: 7, 8].
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
                 <!-- Prog 1 -->
-                <div class="bg-white rounded-2xl p-8 border-t-4 border-blue-600 card-programa">
-                    <div class="bg-blue-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-blue-600">
+                <div class="bg-white rounded-2xl p-8 border-t-4 border-emerald-600 card-programa shadow-sm">
+                    <div class="bg-emerald-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-emerald-600">
                         <i data-feather="map"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-3">1. Riberas y Conectividad Vital</h3>
                     <p class="text-slate-600 text-sm mb-4 min-h-[80px]">
-                        Intervención en cuencas externas (Río Grande y La Fe). Fortalecimiento de la estructura ecológica interviniendo 6 km de bordes de ribera (10m de ancho).
+                        Intervención en cuencas externas (ej. Río Grande). Fortalecimiento de la estructura ecológica interviniendo 6 km de bordes de ribera para mejorar regulación hídrica[cite: 8].
                     </p>
                     <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                        <span class="text-xs font-bold text-slate-400 uppercase">Presupuesto</span>
-                        <span class="text-blue-700 font-bold">$4.500M COPspan>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Presupuesto</span>
+                        <span class="text-emerald-700 font-black text-lg">$4.500M COP[cite: 7]</span>
                     </div>
                 </div>
 
                 <!-- Prog 2 -->
-                <div class="bg-white rounded-2xl p-8 border-t-4 border-emerald-500 card-programa">
-                    <div class="bg-emerald-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-emerald-600">
+                <div class="bg-white rounded-2xl p-8 border-t-4 border-teal-500 card-programa shadow-sm">
+                    <div class="bg-teal-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-teal-600">
                         <i data-feather="layout"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-3">2. Infraestructura Verde (SbN)</h3>
                     <p class="text-slate-600 text-sm mb-4 min-h-[80px]">
-                        Enfoque en cuencas internas (Corregimientos). Transformación de quebradas y corredores ecológicos para aumentar la resiliencia urbana frente al cambio climático.
+                        Intervención en cuencas internas (Corregimientos de Medellín). Transformación de quebradas para aumentar la resiliencia urbana frente al cambio climático[cite: 8].
                     </p>
                     <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                        <span class="text-xs font-bold text-slate-400 uppercase">Presupuesto</span>
-                        <span class="text-emerald-700 font-bold">$4.500M COP</span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Presupuesto</span>
+                        <span class="text-teal-700 font-black text-lg">$4.500M COP[cite: 7]</span>
                     </div>
                 </div>
 
                 <!-- Prog 3 -->
-                <div class="bg-white rounded-2xl p-8 border-t-4 border-indigo-500 card-programa">
-                    <div class="bg-indigo-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-indigo-600">
+                <div class="bg-white rounded-2xl p-8 border-t-4 border-blue-600 card-programa shadow-sm">
+                    <div class="bg-blue-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-blue-600">
                         <i data-feather="cpu"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-3">3. Inteligencia Hidroterritorial</h3>
                     <p class="text-slate-600 text-sm mb-4 min-h-[80px]">
-                        El "cerebro analítico" (SIHT-Med). Integración de datos interinstitucionales y modelación científica para la toma de decisiones informadas y robustas.
+                        El "cerebro analítico" (SIHT-Med). Integración de datos para la toma de decisiones informadas, robustas y basadas en modelación científica predictiva[cite: 8].
                     </p>
                     <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                        <span class="text-xs font-bold text-slate-400 uppercase">Presupuesto</span>
-                        <span class="text-indigo-700 font-bold">$1.500M COP</span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Presupuesto</span>
+                        <span class="text-blue-700 font-black text-lg">$1.500M COP[cite: 7]</span>
                     </div>
                 </div>
 
                 <!-- Prog 4 -->
-                <div class="bg-white rounded-2xl p-8 border-t-4 border-amber-500 card-programa">
+                <div class="bg-white rounded-2xl p-8 border-t-4 border-amber-500 card-programa shadow-sm">
                     <div class="bg-amber-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-amber-600">
                         <i data-feather="users"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-3">4. Gobernanza y Pactos</h3>
                     <p class="text-slate-600 text-sm mb-4 min-h-[80px]">
-                        Articulación y fortalecimiento de capacidades. Creación del Gran Pacto por la Seguridad Hídrica uniendo academia, comunidades, empresas y sector público.
+                        Fortalecimiento de capacidades territoriales. Creación del Gran Pacto por la Seguridad Hídrica uniendo academia, comunidades, empresas y el sector público[cite: 8].
                     </p>
                     <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                        <span class="text-xs font-bold text-slate-400 uppercase">Presupuesto</span>
-                        <span class="text-amber-700 font-bold">$1.500M COP</span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Presupuesto</span>
+                        <span class="text-amber-700 font-black text-lg">$1.500M COP[cite: 7]</span>
                     </div>
                 </div>
 
                 <!-- Prog 5 -->
-                <div class="bg-white rounded-2xl p-8 border-t-4 border-teal-500 card-programa">
-                    <div class="bg-teal-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-teal-600">
+                <div class="bg-white rounded-2xl p-8 border-t-4 border-orange-500 card-programa shadow-sm">
+                    <div class="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-orange-600">
                         <i data-feather="book"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-3">5. Cultura y Pedagogía</h3>
                     <p class="text-slate-600 text-sm mb-4 min-h-[80px]">
-                        "El agua conecta todo". Estrategia de educación intergeneracional para fortalecer la corresponsabilidad y la identidad hidro-territorial en Medellín.
+                        "El agua conecta todo". Estrategia de educación y apropiación social para construir una identidad hidro-territorial intergeneracional[cite: 8].
                     </p>
                     <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                        <span class="text-xs font-bold text-slate-400 uppercase">Presupuesto</span>
-                        <span class="text-teal-700 font-bold">$1.000M COP</span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Presupuesto</span>
+                        <span class="text-orange-700 font-black text-lg">$1.000M COP[cite: 7]</span>
                     </div>
                 </div>
 
                 <!-- Prog 6 -->
-                <div class="bg-white rounded-2xl p-8 border-t-4 border-purple-500 card-programa">
+                <div class="bg-white rounded-2xl p-8 border-t-4 border-purple-600 card-programa shadow-sm">
                     <div class="bg-purple-50 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-purple-600">
                         <i data-feather="pie-chart"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-3">6. Valoración Ecosistémica (ROI)</h3>
                     <p class="text-slate-600 text-sm mb-4 min-h-[80px]">
-                        Cuantificación y valoración integral de beneficios ecológicos, sociales y económicos. Traducción de acciones en retornos tangibles para la toma de decisiones.
+                        Cuantificación de beneficios ecológicos, sociales y económicos. Traducción de cada acción en retornos financieros (ROI) para validar la toma de decisiones[cite: 8].
                     </p>
                     <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                        <span class="text-xs font-bold text-slate-400 uppercase">Presupuesto</span>
-                        <span class="text-purple-700 font-bold">$1.000M COP</span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Presupuesto</span>
+                        <span class="text-purple-700 font-black text-lg">$1.000M COP[cite: 7]</span>
                     </div>
                 </div>
 
             </div>
+
+            <!-- SUB-SECCIÓN DESTACADA: ESCUELAS TALLER DEL AGUA -->
+            <div class="mt-20 bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200">
+                <div class="grid grid-cols-1 lg:grid-cols-3">
+                    <div class="p-10 lg:col-span-1 bg-sky-900 text-white flex flex-col justify-center relative overflow-hidden">
+                        <!-- Background image overlay -->
+                        <div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image: url('Beneficios Riparios 1.jfif');"></div>
+                        <div class="relative z-10">
+                            <h3 class="text-3xl font-black mb-4">Escuelas Taller del Agua</h3>
+                            <p class="text-sky-100 mb-6 leading-relaxed">
+                                Una visión innovadora que concibe el agua como un espacio de aprendizaje (skholé), equilibrando la contemplación artística con la rigurosidad científica y la acción territorial[cite: 9].
+                            </p>
+                            <span class="inline-block bg-sky-700 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Metodología Innovadora</span>
+                        </div>
+                    </div>
+                    <div class="p-10 lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <div>
+                            <div class="flex items-center mb-3">
+                                <div class="bg-emerald-100 text-emerald-700 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">I</div>
+                                <h4 class="font-bold text-slate-900">El Milagro del Agua</h4>
+                            </div>
+                            <p class="text-sm text-slate-600">Espíritu, Arte y Filosofía. Despertar el asombro mediante lecturas de paisaje, caminatas y bitácoras de dibujo naturalista[cite: 9].</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-3">
+                                <div class="bg-emerald-100 text-emerald-700 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">II</div>
+                                <h4 class="font-bold text-slate-900">Anatomía del Territorio</h4>
+                            </div>
+                            <p class="text-sm text-slate-600">Geografía y Ecología. Entender la cuenca como un organismo vivo mediante el mapeo comunitario de zonas de recarga e identificación de bioindicadores[cite: 9].</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-3">
+                                <div class="bg-emerald-100 text-emerald-700 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">III</div>
+                                <h4 class="font-bold text-slate-900">Ciencia Ciudadana</h4>
+                            </div>
+                            <p class="text-sm text-slate-600">Democratización de datos. Transición de la contemplación al monitoreo con pluviómetros y medición de parámetros fisicoquímicos en la comunidad[cite: 9].</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center mb-3">
+                                <div class="bg-emerald-100 text-emerald-700 rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">IV</div>
+                                <h4 class="font-bold text-slate-900">Habitabilidad y Acción</h4>
+                            </div>
+                            <p class="text-sm text-slate-600">Resiliencia a través de soluciones reales: cosecha de agua, restauración de riberas y economía circular estructurada en una red interconectada[cite: 9].</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- CIERRE Y VALIDACIÓN (CuencaVerde) -->
-    <section class="py-24 px-6 bg-slate-900 text-white">
-        <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-8">El Orquestador Hidro-territorial</h2>
+    <!-- CIERRE Y VALIDACIÓN -->
+    <section class="py-24 px-6 bg-slate-900 text-white relative overflow-hidden">
+        <!-- Decoración de fondo -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-black mb-8">Gestión Adaptativa y Legitimidad</h2>
             <p class="text-xl text-slate-300 font-light leading-relaxed mb-12">
-                Este plan integral se ejecuta en alianza entre el <strong>Distrito de Medellín y CuencaVerde</strong>. Aportamos validación territorial, una sólida trayectoria, gerencia integral (4C) y material científico con experticia profunda en el territorio para garantizar legitimidad y resultados.
+                Este plan no es un esfuerzo aislado. Es producto de la alianza entre el <strong>Distrito de Medellín y CuencaVerde</strong>. Aportamos validación territorial, reconocimiento científico y la experiencia necesaria para traducir estrategias en resultados concretos[cite: 8].
             </p>
             
-            <div class="bg-slate-800/50 border border-slate-700 p-10 rounded-2xl inline-block">
-                <i data-feather="droplet" class="w-10 h-10 text-emerald-400 mx-auto mb-6"></i>
-                <h3 class="text-2xl md:text-3xl font-serif italic text-emerald-300">
-                    "El futuro tambien depende de lo que hacemos hoy"
+            <div class="bg-slate-800/80 backdrop-blur border border-slate-700 p-10 rounded-2xl inline-block shadow-2xl">
+                <i data-feather="droplet" class="w-12 h-12 text-emerald-400 mx-auto mb-6"></i>
+                <h3 class="text-2xl md:text-3xl font-light italic text-emerald-300">
+                    "Lo que hacemos hoy, define nuestro futuro."[cite: 8]
                 </h3>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black py-8 text-center border-t border-slate-800">
-        <p class="text-slate-500 text-sm">© 2026 Corporación CuencaVerde - Distrito de Medellín.</p>
+    <footer class="bg-black py-8 text-center">
+        <p class="text-slate-500 text-sm font-medium tracking-wide">© 2026 Corporación CuencaVerde - Distrito de Medellín.</p>
     </footer>
 
-    <!-- Inicializar Iconos -->
     <script>
         feather.replace();
     </script>
