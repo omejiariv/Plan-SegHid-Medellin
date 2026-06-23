@@ -47,24 +47,30 @@
             border-radius: 5px;
         }
 
-        .programa-container {
-            transition: all 0.3s ease;
-        }
-        .programa-container:hover {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        /* Estilos para el visor interactivo de restauración */
-        .restauracion-visor {
-            position: relative;
+        /* 1. ANIMACIÓN: VUELO PANORÁMICO */
+        .vuelo-container {
             width: 100%;
+            height: 380px;
             border-radius: 1rem;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            aspect-ratio: 16 / 9; /* Mantiene la proporción de la imagen */
-            background-color: #0f172a;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        .restauracion-img {
+        .img-vuelo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.6); /* Zoom inicial */
+            animation: vueloPanoramico 24s infinite alternate ease-in-out;
+        }
+        @keyframes vueloPanoramico {
+            0%, 100% { object-position: 50% 80%; transform: scale(1.6); } /* Medellín (Centro) */
+            33% { object-position: 10% 50%; transform: scale(1.8); } /* Occidente */
+            66% { object-position: 90% 30%; transform: scale(1.8); } /* Oriente / Altiplano */
+        }
+
+        /* 2. ANIMACIÓN: VISOR DE RIPARIOS (GIF) */
+        .rip-slide {
             position: absolute;
             top: 0;
             left: 0;
@@ -72,18 +78,35 @@
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 0.8s ease-in-out; /* Transición suave */
+            transition: opacity 1.5s ease-in-out;
         }
-        .restauracion-img.active {
+        .rip-slide.active {
             opacity: 1;
         }
-        .btn-etapa {
-            transition: all 0.2s ease;
+
+        /* 3. ESTILOS ACORDEÓN DE PROGRAMAS */
+        .programa-container {
+            transition: all 0.3s ease;
+            overflow: hidden;
         }
-        .btn-etapa.active {
-            background-color: #059669;
-            color: white;
-            border-color: #059669;
+        .programa-container:hover {
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+        }
+        .programa-body {
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.6s ease-in-out, opacity 0.4s ease-in-out, padding 0.4s ease;
+        }
+        .programa-body.expanded {
+            max-height: 2500px; /* Espacio suficiente para que despliegue */
+            opacity: 1;
+            padding-bottom: 2.5rem;
+        }
+        .chevron {
+            transition: transform 0.4s ease;
+        }
+        .chevron.expanded {
+            transform: rotate(180deg);
         }
     </style>
 </head>
@@ -118,7 +141,7 @@
         </div>
     </header>
 
-    <!-- EL CONTEXTO Y LA INTERDEPENDENCIA -->
+    <!-- EL CONTEXTO Y EL VUELO ANIMADO -->
     <section class="py-24 px-6 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
@@ -127,80 +150,47 @@
                     <p class="text-lg text-slate-600 mb-6 leading-relaxed">
                         Medellín y el Valle de Aburrá operan bajo una <strong>dependencia crítica de cuencas externas</strong> (Norte y Oriente). El agua es el insumo vital que soporta nuestra industria, la producción de energía y la seguridad alimentaria regional.
                     </p>
-                    <p class="text-lg text-slate-600 mb-8 leading-relaxed">
-                        A nivel global, la ONU advierte sobre la entrada a una era de <strong>"bancarrota hídrica"</strong>. Con la intensificación de fenómenos climáticos extremos, la inseguridad hídrica deja de ser un tema ambiental para convertirse en un riesgo económico primario.
-                    </p>
-                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-sm mt-8">
                         <h4 class="font-bold flex items-center mb-2 text-slate-900">
                             <i data-feather="book-open" class="w-5 h-5 mr-3 text-emerald-600"></i> Mandato Normativo y de Financiación
                         </h4>
                         <p class="text-sm text-slate-600">
-                            El <strong>Artículo 41 de la Ley 99 de 1993</strong> exige destinar al menos el 1% de los ingresos corrientes del Distrito para la adquisición y mantenimiento de áreas estratégicas abastecedoras. Este plan es el vehículo para ejecutarlo con rigor.
+                            El <strong>Artículo 41 de la Ley 99 de 1993</strong> exige destinar al menos el 1% de los ingresos corrientes del Distrito para la adquisición y mantenimiento de áreas estratégicas abastecedoras.
                         </p>
                     </div>
                 </div>
                 
-                <!-- Esquema Altitudinal Integrado -->
+                <!-- VUELO ANIMADO (Imagen 8) -->
                 <div>
-                    <img src="imagen 8.jpg" alt="Perfil Altitudinal de Medellín y Cuencas Externas" class="w-full rounded-2xl shadow-xl border border-slate-200">
-                    <p class="text-xs text-slate-400 mt-4 text-center font-medium uppercase tracking-wide">Esquema Altitudinal Integrado: Evidencia de las interdependencias del agua en la región.</p>
+                    <div class="bg-emerald-900 text-emerald-100 text-xs font-bold px-3 py-1 rounded-t-xl text-center uppercase tracking-widest">
+                        Exploración Satelital: Interdependencias del Agua
+                    </div>
+                    <div class="vuelo-container rounded-t-none border-b border-x border-slate-200">
+                        <!-- Usa imagen 8_2.jpg o imagen 8.jpg según tu repositorio -->
+                        <img src="imagen 8.jpg" alt="Vuelo Altitudinal de Medellín" class="img-vuelo">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NUEVO DEEP DIVE INTERACTIVO: LA CIENCIA DE LA RESTAURACIÓN -->
-    <section class="py-24 px-6 bg-slate-900 text-white border-t-8 border-emerald-600">
+    <!-- DEEP DIVE: LA CIENCIA DE LA RESTAURACIÓN -->
+    <section class="py-20 px-6 bg-slate-900 text-white border-t-8 border-emerald-600">
         <div class="max-w-7xl mx-auto text-center mb-12">
-            <span class="inline-block bg-emerald-900 text-emerald-300 text-xs font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-4">Visor Pedagógico Interactivo</span>
-            <h2 class="text-4xl md:text-5xl font-black mb-6">La Ciencia de la Restauración</h2>
-            <p class="text-xl text-slate-400 font-light max-w-3xl mx-auto leading-relaxed">
-                Observa el impacto real de las Soluciones Basadas en la Naturaleza (SbN) en la cuenca del Río Chico. Selecciona las etapas para ver cómo la restauración ecológica transforma un territorio degradado, mejorando la regulación hídrica, filtrando contaminantes y reconstruyendo el tejido social y ambiental.
-            </p>
+            <h2 class="text-3xl md:text-4xl font-black mb-4">El Impacto de la Solución (SbN)</h2>
+            <p class="text-xl text-slate-400 font-light max-w-3xl mx-auto">La diferencia entre un ecosistema degradado y uno restaurado determina la vulnerabilidad de Medellín frente a sequías e inundaciones extremas.</p>
         </div>
-        
         <div class="max-w-6xl mx-auto">
-            
-            <!-- Botones de Control del Visor -->
-            <div class="flex flex-wrap justify-center gap-4 mb-8">
-                <button onclick="cambiarEtapa(1)" id="btn-etapa-1" class="btn-etapa active px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none">
-                    1. Estado Degradado
-                </button>
-                <button onclick="cambiarEtapa(2)" id="btn-etapa-2" class="btn-etapa px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none">
-                    2. Aislamiento y Siembra
-                </button>
-                <button onclick="cambiarEtapa(3)" id="btn-etapa-3" class="btn-etapa px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none">
-                    3. Desarrollo del Dosel
-                </button>
-                <button onclick="cambiarEtapa(4)" id="btn-etapa-4" class="btn-etapa px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none">
-                    4. Ecosistema Restaurado
-                </button>
-            </div>
-
-            <!-- Contenedor del Visor -->
-            <div class="restauracion-visor mb-6">
-                <img src="Rio Chico 1.png" id="img-etapa-1" alt="Río Chico - Estado Degradado" class="restauracion-img active">
-                <img src="Rio Chico 2.png" id="img-etapa-2" alt="Río Chico - Inicio de Restauración" class="restauracion-img">
-                <img src="Rio Chico 3.png" id="img-etapa-3" alt="Río Chico - Desarrollo Intermedio" class="restauracion-img">
-                <img src="Rio Chico 4.png" id="img-etapa-4" alt="Río Chico - Ecosistema Restaurado" class="restauracion-img">
-            </div>
-
-            <!-- Texto Descriptivo Dinámico -->
-            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 max-w-4xl mx-auto text-center min-h-[120px] flex items-center justify-center">
-                <p id="texto-etapa" class="text-lg text-slate-300 transition-opacity duration-500">
-                    <strong>Etapa 1:</strong> Potrero degradado sin cobertura arbórea. Alta turbiedad en el agua por erosión y acceso directo de ganado al cauce, generando aportes de nutrientes y patógenos. Nula regulación hídrica.
-                </p>
-            </div>
-
+            <img src="Sin y Con Riparios.png" alt="Comparativa de Bosque Ripario" class="w-full rounded-2xl shadow-2xl border border-slate-700">
         </div>
     </section>
 
-    <!-- INTRODUCCIÓN A LOS PROGRAMAS (Árbol) -->
+    <!-- ÁRBOL DE PROGRAMAS -->
     <section class="pt-24 pb-12 px-6 bg-slate-50">
         <div class="max-w-7xl mx-auto text-center">
             <h2 class="text-4xl font-black text-slate-900 mb-6">Estructura Programática Integrada</h2>
             <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-16">
-                Un modelo sistémico de 6 programas diseñados bajo estándares internacionales para garantizar la seguridad hídrica integral.
+                Un modelo sistémico de 6 programas. <strong class="text-emerald-700">Haz clic en cada programa</strong> para expandir y visualizar su estrategia, presupuesto y metas técnicas.
             </p>
             
             <div class="max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-sm border border-slate-200 mb-16">
@@ -209,121 +199,168 @@
         </div>
     </section>
 
-    <!-- DETALLE DE LOS 6 PROGRAMAS CON METAS E INDICADORES -->
+    <!-- ACORDEÓN DE PROGRAMAS -->
     <section class="pb-24 px-6 bg-slate-50">
-        <div class="max-w-5xl mx-auto space-y-12">
+        <div class="max-w-5xl mx-auto space-y-6">
             
-            <!-- Programa 1 -->
-            <div class="bg-white rounded-2xl border-l-8 border-blue-500 p-8 md:p-10 programa-container border-y border-r border-slate-200">
-                <div class="flex items-center mb-6">
-                    <div class="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center text-blue-600 mr-6 flex-shrink-0">
-                        <i data-feather="map" class="w-8 h-8"></i>
+            <!-- Programa 1 (CON ANIMACIÓN RIPARIOS) -->
+            <div class="bg-white rounded-2xl border-l-8 border-blue-500 programa-container border-y border-r border-slate-200">
+                <div class="p-6 md:p-8 cursor-pointer flex justify-between items-center" onclick="toggleProg(1)">
+                    <div class="flex items-center">
+                        <div class="bg-blue-50 w-14 h-14 rounded-full flex items-center justify-center text-blue-600 mr-5 flex-shrink-0">
+                            <i data-feather="map" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl md:text-2xl font-black text-slate-900">1. Riberas y Conectividad Vital</h3>
+                            <p class="text-blue-700 font-bold uppercase tracking-wide text-xs mt-1">Presupuesto: $4.500M COP</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-black text-slate-900">1. Riberas y Conectividad Vital</h3>
-                        <p class="text-blue-700 font-bold uppercase tracking-wide text-sm mt-1">Presupuesto: $4.500M COP</p>
-                    </div>
+                    <i data-feather="chevron-down" id="chev-1" class="chevron text-slate-400 w-8 h-8"></i>
                 </div>
-                <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                    Intervención en cuencas externas (ej. Río Grande y La Fe). Fortalecimiento de la estructura ecológica interviniendo bordes de ribera para mejorar la regulación hídrica y proteger la Estructura Ecológica Principal.
-                </p>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <img src="Metas_Indicadores_P1.png" alt="Metas e Indicadores Programa 1" class="w-full h-auto object-contain mix-blend-multiply">
+                
+                <div id="prog-body-1" class="programa-body px-6 md:px-8">
+                    <p class="text-slate-600 text-lg mb-8 leading-relaxed border-t border-slate-100 pt-6">
+                        Intervención en cuencas externas (ej. Río Grande y La Fe). Fortalecimiento de la estructura ecológica interviniendo bordes de ribera para mejorar la regulación hídrica.
+                    </p>
+                    
+                    <!-- ANIMACIÓN AUTOMÁTICA RIPARIOS -->
+                    <div class="mb-8">
+                        <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-t-lg uppercase tracking-wider">Evolución del Proceso de Restauración</span>
+                        <div class="relative w-full h-64 md:h-96 rounded-xl rounded-tl-none overflow-hidden border border-blue-100 shadow-inner bg-slate-200">
+                            <img src="Sin Bosques Riparios.png" class="rip-slide active" alt="Paso 1">
+                            <img src="SE Bosques Riparios 1.png" class="rip-slide" alt="Paso 2">
+                            <img src="SE Bosques Riparios 2.png" class="rip-slide" alt="Paso 3">
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <img src="Metas_Indicadores_P1.png" alt="Metas e Indicadores" class="w-full h-auto mix-blend-multiply">
+                    </div>
                 </div>
             </div>
 
             <!-- Programa 2 -->
-            <div class="bg-white rounded-2xl border-l-8 border-emerald-500 p-8 md:p-10 programa-container border-y border-r border-slate-200">
-                <div class="flex items-center mb-6">
-                    <div class="bg-emerald-50 w-16 h-16 rounded-full flex items-center justify-center text-emerald-600 mr-6 flex-shrink-0">
-                        <i data-feather="layout" class="w-8 h-8"></i>
+            <div class="bg-white rounded-2xl border-l-8 border-emerald-500 programa-container border-y border-r border-slate-200">
+                <div class="p-6 md:p-8 cursor-pointer flex justify-between items-center" onclick="toggleProg(2)">
+                    <div class="flex items-center">
+                        <div class="bg-emerald-50 w-14 h-14 rounded-full flex items-center justify-center text-emerald-600 mr-5 flex-shrink-0">
+                            <i data-feather="layout" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl md:text-2xl font-black text-slate-900">2. Infraestructura Verde (SbN)</h3>
+                            <p class="text-emerald-700 font-bold uppercase tracking-wide text-xs mt-1">Presupuesto: $4.500M COP</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-black text-slate-900">2. Infraestructura Verde (SbN)</h3>
-                        <p class="text-emerald-700 font-bold uppercase tracking-wide text-sm mt-1">Presupuesto: $4.500M COP</p>
-                    </div>
+                    <i data-feather="chevron-down" id="chev-2" class="chevron text-slate-400 w-8 h-8"></i>
                 </div>
-                <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                    Enfoque en cuencas internas (Corregimientos de Medellín). Transformación de quebradas y drenajes urbanos en ejes de infraestructura ecológica multifuncional para aumentar la resiliencia urbana.
-                </p>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <img src="Metas_Indicadores_P2.png" alt="Metas e Indicadores Programa 2" class="w-full h-auto object-contain mix-blend-multiply">
+                
+                <div id="prog-body-2" class="programa-body px-6 md:px-8">
+                    <p class="text-slate-600 text-lg mb-8 leading-relaxed border-t border-slate-100 pt-6">
+                        Enfoque en cuencas internas (Corregimientos de Medellín). Transformación de quebradas y drenajes urbanos en ejes de infraestructura ecológica multifuncional para aumentar la resiliencia urbana.
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <img src="Metas_Indicadores_P2.png" alt="Metas e Indicadores" class="w-full h-auto mix-blend-multiply">
+                    </div>
                 </div>
             </div>
 
             <!-- Programa 3 -->
-            <div class="bg-white rounded-2xl border-l-8 border-indigo-500 p-8 md:p-10 programa-container border-y border-r border-slate-200">
-                <div class="flex items-center mb-6">
-                    <div class="bg-indigo-50 w-16 h-16 rounded-full flex items-center justify-center text-indigo-600 mr-6 flex-shrink-0">
-                        <i data-feather="cpu" class="w-8 h-8"></i>
+            <div class="bg-white rounded-2xl border-l-8 border-indigo-500 programa-container border-y border-r border-slate-200">
+                <div class="p-6 md:p-8 cursor-pointer flex justify-between items-center" onclick="toggleProg(3)">
+                    <div class="flex items-center">
+                        <div class="bg-indigo-50 w-14 h-14 rounded-full flex items-center justify-center text-indigo-600 mr-5 flex-shrink-0">
+                            <i data-feather="cpu" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl md:text-2xl font-black text-slate-900">3. Inteligencia Hidroterritorial</h3>
+                            <p class="text-indigo-700 font-bold uppercase tracking-wide text-xs mt-1">Presupuesto: $1.500M COP</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-black text-slate-900">3. Inteligencia Hidroterritorial</h3>
-                        <p class="text-indigo-700 font-bold uppercase tracking-wide text-sm mt-1">Presupuesto: $1.500M COP</p>
-                    </div>
+                    <i data-feather="chevron-down" id="chev-3" class="chevron text-slate-400 w-8 h-8"></i>
                 </div>
-                <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                    El "cerebro analítico" (SIHT-Med). Integración de datos interinstitucionales y modelación predictiva para la toma de decisiones informadas, minimizando la incertidumbre.
-                </p>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <img src="Metas_Indicadores_P3.png" alt="Metas e Indicadores Programa 3" class="w-full h-auto object-contain mix-blend-multiply">
+                
+                <div id="prog-body-3" class="programa-body px-6 md:px-8">
+                    <p class="text-slate-600 text-lg mb-8 leading-relaxed border-t border-slate-100 pt-6">
+                        El "cerebro analítico" (SIHT-Med). Integración de datos interinstitucionales y modelación predictiva para la toma de decisiones informadas, minimizando la incertidumbre.
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <img src="Metas_Indicadores_P3.png" alt="Metas e Indicadores" class="w-full h-auto mix-blend-multiply">
+                    </div>
                 </div>
             </div>
 
             <!-- Programa 4 -->
-            <div class="bg-white rounded-2xl border-l-8 border-amber-500 p-8 md:p-10 programa-container border-y border-r border-slate-200">
-                <div class="flex items-center mb-6">
-                    <div class="bg-amber-50 w-16 h-16 rounded-full flex items-center justify-center text-amber-600 mr-6 flex-shrink-0">
-                        <i data-feather="users" class="w-8 h-8"></i>
+            <div class="bg-white rounded-2xl border-l-8 border-amber-500 programa-container border-y border-r border-slate-200">
+                <div class="p-6 md:p-8 cursor-pointer flex justify-between items-center" onclick="toggleProg(4)">
+                    <div class="flex items-center">
+                        <div class="bg-amber-50 w-14 h-14 rounded-full flex items-center justify-center text-amber-600 mr-5 flex-shrink-0">
+                            <i data-feather="users" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl md:text-2xl font-black text-slate-900">4. Gobernanza y Pactos</h3>
+                            <p class="text-amber-700 font-bold uppercase tracking-wide text-xs mt-1">Presupuesto: $1.500M COP</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-black text-slate-900">4. Gobernanza y Pactos</h3>
-                        <p class="text-amber-700 font-bold uppercase tracking-wide text-sm mt-1">Presupuesto: $1.500M COP</p>
-                    </div>
+                    <i data-feather="chevron-down" id="chev-4" class="chevron text-slate-400 w-8 h-8"></i>
                 </div>
-                <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                    Articulación y fortalecimiento de capacidades. Creación del Gran Pacto por la Seguridad Hídrica uniendo academia, comunidades, empresas y el sector público en un objetivo común.
-                </p>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <img src="Metas_Indicadores_P4.png" alt="Metas e Indicadores Programa 4" class="w-full h-auto object-contain mix-blend-multiply">
+                
+                <div id="prog-body-4" class="programa-body px-6 md:px-8">
+                    <p class="text-slate-600 text-lg mb-8 leading-relaxed border-t border-slate-100 pt-6">
+                        Articulación y fortalecimiento de capacidades. Creación del Gran Pacto por la Seguridad Hídrica uniendo academia, comunidades, empresas y el sector público en un objetivo común.
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <img src="Metas_Indicadores_P4.png" alt="Metas e Indicadores" class="w-full h-auto mix-blend-multiply">
+                    </div>
                 </div>
             </div>
 
             <!-- Programa 5 -->
-            <div class="bg-white rounded-2xl border-l-8 border-teal-500 p-8 md:p-10 programa-container border-y border-r border-slate-200">
-                <div class="flex items-center mb-6">
-                    <div class="bg-teal-50 w-16 h-16 rounded-full flex items-center justify-center text-teal-600 mr-6 flex-shrink-0">
-                        <i data-feather="book" class="w-8 h-8"></i>
+            <div class="bg-white rounded-2xl border-l-8 border-teal-500 programa-container border-y border-r border-slate-200">
+                <div class="p-6 md:p-8 cursor-pointer flex justify-between items-center" onclick="toggleProg(5)">
+                    <div class="flex items-center">
+                        <div class="bg-teal-50 w-14 h-14 rounded-full flex items-center justify-center text-teal-600 mr-5 flex-shrink-0">
+                            <i data-feather="book" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl md:text-2xl font-black text-slate-900">5. Cultura y Pedagogía</h3>
+                            <p class="text-teal-700 font-bold uppercase tracking-wide text-xs mt-1">Presupuesto: $1.000M COP</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-black text-slate-900">5. Cultura y Pedagogía</h3>
-                        <p class="text-teal-700 font-bold uppercase tracking-wide text-sm mt-1">Presupuesto: $1.000M COP</p>
-                    </div>
+                    <i data-feather="chevron-down" id="chev-5" class="chevron text-slate-400 w-8 h-8"></i>
                 </div>
-                <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                    "El agua conecta todo". Estrategia de educación y apropiación social para construir una identidad hidro-territorial intergeneracional sólida en Medellín.
-                </p>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <img src="Metas_Indicadores_P5.png" alt="Metas e Indicadores Programa 5" class="w-full h-auto object-contain mix-blend-multiply">
+                
+                <div id="prog-body-5" class="programa-body px-6 md:px-8">
+                    <p class="text-slate-600 text-lg mb-8 leading-relaxed border-t border-slate-100 pt-6">
+                        "El agua conecta todo". Estrategia de educación y apropiación social para construir una identidad hidro-territorial intergeneracional sólida en Medellín.
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <img src="Metas_Indicadores_P5.png" alt="Metas e Indicadores" class="w-full h-auto mix-blend-multiply">
+                    </div>
                 </div>
             </div>
 
             <!-- Programa 6 -->
-            <div class="bg-white rounded-2xl border-l-8 border-purple-500 p-8 md:p-10 programa-container border-y border-r border-slate-200">
-                <div class="flex items-center mb-6">
-                    <div class="bg-purple-50 w-16 h-16 rounded-full flex items-center justify-center text-purple-600 mr-6 flex-shrink-0">
-                        <i data-feather="pie-chart" class="w-8 h-8"></i>
+            <div class="bg-white rounded-2xl border-l-8 border-purple-500 programa-container border-y border-r border-slate-200">
+                <div class="p-6 md:p-8 cursor-pointer flex justify-between items-center" onclick="toggleProg(6)">
+                    <div class="flex items-center">
+                        <div class="bg-purple-50 w-14 h-14 rounded-full flex items-center justify-center text-purple-600 mr-5 flex-shrink-0">
+                            <i data-feather="pie-chart" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl md:text-2xl font-black text-slate-900">6. Valoración Ecosistémica (ROI)</h3>
+                            <p class="text-purple-700 font-bold uppercase tracking-wide text-xs mt-1">Presupuesto: $1.000M COP</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-black text-slate-900">6. Valoración Ecosistémica (ROI)</h3>
-                        <p class="text-purple-700 font-bold uppercase tracking-wide text-sm mt-1">Presupuesto: $1.000M COP</p>
-                    </div>
+                    <i data-feather="chevron-down" id="chev-6" class="chevron text-slate-400 w-8 h-8"></i>
                 </div>
-                <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                    Cuantificación de beneficios ecológicos, sociales y económicos. Traducción de cada acción en retornos tangibles (ROI) para fundamentar y validar la toma de decisiones financieras.
-                </p>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <img src="Metas_Indicadores_P6.png" alt="Metas e Indicadores Programa 6" class="w-full h-auto object-contain mix-blend-multiply">
+                
+                <div id="prog-body-6" class="programa-body px-6 md:px-8">
+                    <p class="text-slate-600 text-lg mb-8 leading-relaxed border-t border-slate-100 pt-6">
+                        Cuantificación de beneficios ecológicos, sociales y económicos. Traducción de cada acción en retornos tangibles (ROI) para fundamentar y validar la toma de decisiones financieras.
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <img src="Metas_Indicadores_P6.png" alt="Metas e Indicadores" class="w-full h-auto mix-blend-multiply">
+                    </div>
                 </div>
             </div>
 
@@ -335,7 +372,7 @@
         <div class="max-w-6xl mx-auto text-center">
             <h2 class="text-4xl font-black text-slate-900 mb-6">Asignación Financiera Estratégica</h2>
             <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-16">
-                La inversión distrital no se diluye; se concentra estratégicamente aprovechando sinergias interinstitucionales para asegurar la sostenibilidad futura.
+                La inversión distrital no se diluye; se concentra estratégicamente aprovechando sinergias interinstitucionales.
             </p>
             <div class="bg-slate-50 p-8 rounded-3xl shadow-sm border border-slate-200">
                 <img src="Presupuesto_Propuesta.png" alt="Diagrama Sankey de Presupuesto" class="w-full h-auto object-contain mix-blend-multiply">
@@ -343,7 +380,7 @@
         </div>
     </section>
 
-    <!-- ESCUELAS TALLER DEL AGUA (Fondo Río Chico) -->
+    <!-- ESCUELAS TALLER DEL AGUA -->
     <section class="py-32 px-6 escuelas-bg text-white relative">
         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
         <div class="max-w-7xl mx-auto relative z-10">
@@ -407,39 +444,47 @@
         <p class="text-slate-500 text-sm font-medium tracking-wide">© 2026 Corporación CuencaVerde - Distrito de Medellín.</p>
     </footer>
 
-    <!-- SCRIPT PARA EL VISOR INTERACTIVO -->
+    <!-- SCRIPT PARA INTERACTIVIDAD -->
     <script>
+        // Inicializar Iconos
         feather.replace();
 
-        const textosEtapas = {
-            1: "<strong>Etapa 1 (Estado Degradado):</strong> Potrero sin cobertura arbórea. Alta turbiedad por erosión y acceso directo de ganado al cauce, generando aportes de nutrientes y patógenos. Nula regulación hídrica.",
-            2: "<strong>Etapa 2 (Aislamiento y Siembra):</strong> Se cerca el cauce para impedir el ingreso del ganado (aislamiento pasivo) y se inicia la siembra de especies nativas de rápido crecimiento. Comienza la estabilización de orillas.",
-            3: "<strong>Etapa 3 (Desarrollo del Dosel):</strong> La vegetación riparia forma un dosel inicial que da sombra al río, bajando la temperatura del agua. Las raíces filtran agroquímicos y evitan la caída de sedimentos.",
-            4: "<strong>Etapa 4 (Ecosistema Restaurado):</strong> Corredor vivo consolidado. Máxima infiltración de agua, biodiversidad retornando (aves y fauna), agua cristalina y un tejido social que convive de forma sostenible con la cuenca."
+        // LÓGICA ACORDEÓN DE PROGRAMAS
+        function toggleProg(id) {
+            const body = document.getElementById('prog-body-' + id);
+            const chevron = document.getElementById('chev-' + id);
+            
+            if(body.classList.contains('expanded')) {
+                body.classList.remove('expanded');
+                chevron.classList.remove('expanded');
+            } else {
+                // Opcional: Cerrar los demás al abrir uno nuevo (descomenta si lo deseas)
+                /*
+                for(let i=1; i<=6; i++) {
+                    document.getElementById('prog-body-' + i).classList.remove('expanded');
+                    document.getElementById('chev-' + i).classList.remove('expanded');
+                }
+                */
+                body.classList.add('expanded');
+                chevron.classList.add('expanded');
+            }
+        }
+
+        // Abrir el primer programa por defecto al cargar la página
+        window.onload = () => {
+            toggleProg(1);
         };
 
-        function cambiarEtapa(etapa) {
-            // Ocultar todas las imágenes
-            document.querySelectorAll('.restauracion-img').forEach(img => {
-                img.classList.remove('active');
-            });
-            // Mostrar la imagen seleccionada
-            document.getElementById('img-etapa-' + etapa).classList.add('active');
-
-            // Resetear estilos de botones
-            document.querySelectorAll('.btn-etapa').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            // Resaltar botón seleccionado
-            document.getElementById('btn-etapa-' + etapa).classList.add('active');
-
-            // Cambiar texto con pequeño efecto de desvanecimiento
-            const textoContenedor = document.getElementById('texto-etapa');
-            textoContenedor.style.opacity = 0;
-            setTimeout(() => {
-                textoContenedor.innerHTML = textosEtapas[etapa];
-                textoContenedor.style.opacity = 1;
-            }, 300);
+        // LÓGICA VISOR DE RIPARIOS (GIF AUTOMÁTICO)
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.rip-slide');
+        
+        if(slides.length > 0) {
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 3000); // Cambia cada 3 segundos
         }
     </script>
 </body>
