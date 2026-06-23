@@ -174,14 +174,49 @@
         </div>
     </section>
 
-    <!-- DEEP DIVE: LA CIENCIA DE LA RESTAURACIÓN -->
-    <section class="py-20 px-6 bg-slate-900 text-white border-t-8 border-emerald-600">
+    <!-- NUEVO DEEP DIVE INTERACTIVO: LA CIENCIA DE LA RESTAURACIÓN -->
+    <section class="py-24 px-6 bg-slate-900 text-white border-t-8 border-emerald-600">
         <div class="max-w-7xl mx-auto text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-black mb-4">El Impacto de la Solución (SbN)</h2>
-            <p class="text-xl text-slate-400 font-light max-w-3xl mx-auto">La diferencia entre un ecosistema degradado y uno restaurado determina la vulnerabilidad de Medellín frente a sequías e inundaciones extremas.</p>
+            <span class="inline-block bg-emerald-900 text-emerald-300 text-xs font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-4">Visor Pedagógico Interactivo</span>
+            <h2 class="text-4xl md:text-5xl font-black mb-6">La Ciencia de la Restauración</h2>
+            <p class="text-xl text-slate-400 font-light max-w-3xl mx-auto leading-relaxed">
+                Observa el impacto real de las Soluciones Basadas en la Naturaleza (SbN) en la cuenca del Río Chico. Selecciona las etapas para ver cómo la restauración ecológica transforma un territorio degradado, mejorando la regulación hídrica, filtrando contaminantes y reconstruyendo el tejido social y ambiental.
+            </p>
         </div>
+        
         <div class="max-w-6xl mx-auto">
-            <img src="Sin y Con Riparios.png" alt="Comparativa de Bosque Ripario" class="w-full rounded-2xl shadow-2xl border border-slate-700">
+            
+            <!-- Botones de Control del Visor -->
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button onclick="cambiarEtapa(1)" id="btn-etapa-1" class="btn-etapa active px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none">
+                    1. Estado Degradado
+                </button>
+                <button onclick="cambiarEtapa(2)" id="btn-etapa-2" class="btn-etapa px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none">
+                    2. Aislamiento y Siembra
+                </button>
+                <button onclick="cambiarEtapa(3)" id="btn-etapa-3" class="btn-etapa px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none">
+                    3. Desarrollo del Dosel
+                </button>
+                <button onclick="cambiarEtapa(4)" id="btn-etapa-4" class="btn-etapa px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none">
+                    4. Ecosistema Restaurado
+                </button>
+            </div>
+
+            <!-- Contenedor del Visor -->
+            <div class="restauracion-visor mb-6">
+                <img src="Rio Chico 1.png" id="img-etapa-1" alt="Río Chico - Estado Degradado" class="restauracion-img active">
+                <img src="Rio Chico 2.png" id="img-etapa-2" alt="Río Chico - Inicio de Restauración" class="restauracion-img">
+                <img src="Rio Chico 3.png" id="img-etapa-3" alt="Río Chico - Desarrollo Intermedio" class="restauracion-img">
+                <img src="Rio Chico 4_2.png" id="img-etapa-4" alt="Río Chico - Ecosistema Restaurado" class="restauracion-img">
+            </div>
+
+            <!-- Texto Descriptivo Dinámico -->
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 max-w-4xl mx-auto text-center min-h-[120px] flex items-center justify-center">
+                <p id="texto-etapa" class="text-lg text-slate-300 transition-opacity duration-500">
+                    <strong>Etapa 1:</strong> Potrero degradado sin cobertura arbórea. Alta turbiedad en el agua por erosión y acceso directo de ganado al cauce, generando aportes de nutrientes y patógenos. Nula regulación hídrica.
+                </p>
+            </div>
+
         </div>
     </section>
 
