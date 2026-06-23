@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan Estratégico de Seguridad Hídrica - Medellín 2026</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
     <style>
@@ -15,7 +18,6 @@
             color: #0f172a;
         }
 
-        /* Ruta limpia directa al archivo */
         .hero-bg {
             background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.7)), url('image_da4369.jpg');
             background-size: cover;
@@ -23,7 +25,6 @@
             background-attachment: fixed;
         }
 
-        /* Ruta limpia directa al archivo */
         .escuelas-bg {
             background-image: linear-gradient(rgba(8, 47, 73, 0.85), rgba(8, 47, 73, 0.85)), url('Rio Chico 4.png');
             background-size: cover;
@@ -52,10 +53,43 @@
         .programa-container:hover {
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
+
+        /* Estilos para el visor interactivo de restauración */
+        .restauracion-visor {
+            position: relative;
+            width: 100%;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            aspect-ratio: 16 / 9; /* Mantiene la proporción de la imagen */
+            background-color: #0f172a;
+        }
+        .restauracion-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out; /* Transición suave */
+        }
+        .restauracion-img.active {
+            opacity: 1;
+        }
+        .btn-etapa {
+            transition: all 0.2s ease;
+        }
+        .btn-etapa.active {
+            background-color: #059669;
+            color: white;
+            border-color: #059669;
+        }
     </style>
 </head>
 <body class="antialiased">
 
+    <!-- Navegación Institucional -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-5">
@@ -71,6 +105,7 @@
         </div>
     </nav>
 
+    <!-- HERO SECTION -->
     <header class="hero-bg text-white py-32 px-6">
         <div class="max-w-6xl mx-auto">
             <span class="text-emerald-400 font-bold tracking-widest uppercase text-sm mb-4 block">Propuesta Técnica y Estratégica</span>
@@ -83,6 +118,7 @@
         </div>
     </header>
 
+    <!-- EL CONTEXTO Y LA INTERDEPENDENCIA -->
     <section class="py-24 px-6 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
@@ -104,6 +140,7 @@
                     </div>
                 </div>
                 
+                <!-- Esquema Altitudinal Integrado -->
                 <div>
                     <img src="imagen 8.jpg" alt="Perfil Altitudinal de Medellín y Cuencas Externas" class="w-full rounded-2xl shadow-xl border border-slate-200">
                     <p class="text-xs text-slate-400 mt-4 text-center font-medium uppercase tracking-wide">Esquema Altitudinal Integrado: Evidencia de las interdependencias del agua en la región.</p>
@@ -112,17 +149,53 @@
         </div>
     </section>
 
-    <section class="py-20 px-6 bg-slate-900 text-white border-t-8 border-emerald-600">
+    <!-- NUEVO DEEP DIVE INTERACTIVO: LA CIENCIA DE LA RESTAURACIÓN -->
+    <section class="py-24 px-6 bg-slate-900 text-white border-t-8 border-emerald-600">
         <div class="max-w-7xl mx-auto text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-black mb-4">El Impacto de la Solución (SbN)</h2>
-            <p class="text-xl text-slate-400 font-light max-w-3xl mx-auto">La diferencia entre un ecosistema degradado y uno restaurado determina la vulnerabilidad de Medellín frente a sequías e inundaciones extremas.</p>
+            <span class="inline-block bg-emerald-900 text-emerald-300 text-xs font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-4">Visor Pedagógico Interactivo</span>
+            <h2 class="text-4xl md:text-5xl font-black mb-6">La Ciencia de la Restauración</h2>
+            <p class="text-xl text-slate-400 font-light max-w-3xl mx-auto leading-relaxed">
+                Observa el impacto real de las Soluciones Basadas en la Naturaleza (SbN) en la cuenca del Río Chico. Selecciona las etapas para ver cómo la restauración ecológica transforma un territorio degradado, mejorando la regulación hídrica, filtrando contaminantes y reconstruyendo el tejido social y ambiental.
+            </p>
         </div>
         
         <div class="max-w-6xl mx-auto">
-            <img src="Sin y Con Riparios.png" alt="Comparativa de Bosque Ripario Degradado vs Restaurado" class="w-full rounded-2xl shadow-2xl border border-slate-700">
+            
+            <!-- Botones de Control del Visor -->
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button onclick="cambiarEtapa(1)" id="btn-etapa-1" class="btn-etapa active px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none">
+                    1. Estado Degradado
+                </button>
+                <button onclick="cambiarEtapa(2)" id="btn-etapa-2" class="btn-etapa px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none">
+                    2. Aislamiento y Siembra
+                </button>
+                <button onclick="cambiarEtapa(3)" id="btn-etapa-3" class="btn-etapa px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none">
+                    3. Desarrollo del Dosel
+                </button>
+                <button onclick="cambiarEtapa(4)" id="btn-etapa-4" class="btn-etapa px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none">
+                    4. Ecosistema Restaurado
+                </button>
+            </div>
+
+            <!-- Contenedor del Visor -->
+            <div class="restauracion-visor mb-6">
+                <img src="Rio Chico 1.png" id="img-etapa-1" alt="Río Chico - Estado Degradado" class="restauracion-img active">
+                <img src="Rio Chico 2.png" id="img-etapa-2" alt="Río Chico - Inicio de Restauración" class="restauracion-img">
+                <img src="Rio Chico 3.png" id="img-etapa-3" alt="Río Chico - Desarrollo Intermedio" class="restauracion-img">
+                <img src="Rio Chico 4_2.png" id="img-etapa-4" alt="Río Chico - Ecosistema Restaurado" class="restauracion-img">
+            </div>
+
+            <!-- Texto Descriptivo Dinámico -->
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 max-w-4xl mx-auto text-center min-h-[120px] flex items-center justify-center">
+                <p id="texto-etapa" class="text-lg text-slate-300 transition-opacity duration-500">
+                    <strong>Etapa 1:</strong> Potrero degradado sin cobertura arbórea. Alta turbiedad en el agua por erosión y acceso directo de ganado al cauce, generando aportes de nutrientes y patógenos. Nula regulación hídrica.
+                </p>
+            </div>
+
         </div>
     </section>
 
+    <!-- INTRODUCCIÓN A LOS PROGRAMAS (Árbol) -->
     <section class="pt-24 pb-12 px-6 bg-slate-50">
         <div class="max-w-7xl mx-auto text-center">
             <h2 class="text-4xl font-black text-slate-900 mb-6">Estructura Programática Integrada</h2>
@@ -136,9 +209,11 @@
         </div>
     </section>
 
+    <!-- DETALLE DE LOS 6 PROGRAMAS CON METAS E INDICADORES -->
     <section class="pb-24 px-6 bg-slate-50">
         <div class="max-w-5xl mx-auto space-y-12">
             
+            <!-- Programa 1 -->
             <div class="bg-white rounded-2xl border-l-8 border-blue-500 p-8 md:p-10 programa-container border-y border-r border-slate-200">
                 <div class="flex items-center mb-6">
                     <div class="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center text-blue-600 mr-6 flex-shrink-0">
@@ -157,6 +232,7 @@
                 </div>
             </div>
 
+            <!-- Programa 2 -->
             <div class="bg-white rounded-2xl border-l-8 border-emerald-500 p-8 md:p-10 programa-container border-y border-r border-slate-200">
                 <div class="flex items-center mb-6">
                     <div class="bg-emerald-50 w-16 h-16 rounded-full flex items-center justify-center text-emerald-600 mr-6 flex-shrink-0">
@@ -175,6 +251,7 @@
                 </div>
             </div>
 
+            <!-- Programa 3 -->
             <div class="bg-white rounded-2xl border-l-8 border-indigo-500 p-8 md:p-10 programa-container border-y border-r border-slate-200">
                 <div class="flex items-center mb-6">
                     <div class="bg-indigo-50 w-16 h-16 rounded-full flex items-center justify-center text-indigo-600 mr-6 flex-shrink-0">
@@ -193,6 +270,7 @@
                 </div>
             </div>
 
+            <!-- Programa 4 -->
             <div class="bg-white rounded-2xl border-l-8 border-amber-500 p-8 md:p-10 programa-container border-y border-r border-slate-200">
                 <div class="flex items-center mb-6">
                     <div class="bg-amber-50 w-16 h-16 rounded-full flex items-center justify-center text-amber-600 mr-6 flex-shrink-0">
@@ -211,6 +289,7 @@
                 </div>
             </div>
 
+            <!-- Programa 5 -->
             <div class="bg-white rounded-2xl border-l-8 border-teal-500 p-8 md:p-10 programa-container border-y border-r border-slate-200">
                 <div class="flex items-center mb-6">
                     <div class="bg-teal-50 w-16 h-16 rounded-full flex items-center justify-center text-teal-600 mr-6 flex-shrink-0">
@@ -229,6 +308,7 @@
                 </div>
             </div>
 
+            <!-- Programa 6 -->
             <div class="bg-white rounded-2xl border-l-8 border-purple-500 p-8 md:p-10 programa-container border-y border-r border-slate-200">
                 <div class="flex items-center mb-6">
                     <div class="bg-purple-50 w-16 h-16 rounded-full flex items-center justify-center text-purple-600 mr-6 flex-shrink-0">
@@ -250,6 +330,7 @@
         </div>
     </section>
 
+    <!-- ASIGNACIÓN FINANCIERA (SANKEY) -->
     <section class="py-24 px-6 bg-white border-t border-slate-200">
         <div class="max-w-6xl mx-auto text-center">
             <h2 class="text-4xl font-black text-slate-900 mb-6">Asignación Financiera Estratégica</h2>
@@ -262,6 +343,7 @@
         </div>
     </section>
 
+    <!-- ESCUELAS TALLER DEL AGUA (Fondo Río Chico) -->
     <section class="py-32 px-6 escuelas-bg text-white relative">
         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
         <div class="max-w-7xl mx-auto relative z-10">
@@ -294,6 +376,7 @@
         </div>
     </section>
 
+    <!-- GOBERNANZA Y CIERRE -->
     <section class="py-24 px-6 bg-white">
         <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -318,13 +401,46 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="bg-slate-900 py-10 text-center">
         <img src="CuencaVerde Logo.jpg" alt="CuencaVerde Logo" class="h-10 object-contain mx-auto mb-4 grayscale brightness-200 opacity-50">
         <p class="text-slate-500 text-sm font-medium tracking-wide">© 2026 Corporación CuencaVerde - Distrito de Medellín.</p>
     </footer>
 
+    <!-- SCRIPT PARA EL VISOR INTERACTIVO -->
     <script>
         feather.replace();
+
+        const textosEtapas = {
+            1: "<strong>Etapa 1 (Estado Degradado):</strong> Potrero sin cobertura arbórea. Alta turbiedad por erosión y acceso directo de ganado al cauce, generando aportes de nutrientes y patógenos. Nula regulación hídrica.",
+            2: "<strong>Etapa 2 (Aislamiento y Siembra):</strong> Se cerca el cauce para impedir el ingreso del ganado (aislamiento pasivo) y se inicia la siembra de especies nativas de rápido crecimiento. Comienza la estabilización de orillas.",
+            3: "<strong>Etapa 3 (Desarrollo del Dosel):</strong> La vegetación riparia forma un dosel inicial que da sombra al río, bajando la temperatura del agua. Las raíces filtran agroquímicos y evitan la caída de sedimentos.",
+            4: "<strong>Etapa 4 (Ecosistema Restaurado):</strong> Corredor vivo consolidado. Máxima infiltración de agua, biodiversidad retornando (aves y fauna), agua cristalina y un tejido social que convive de forma sostenible con la cuenca."
+        };
+
+        function cambiarEtapa(etapa) {
+            // Ocultar todas las imágenes
+            document.querySelectorAll('.restauracion-img').forEach(img => {
+                img.classList.remove('active');
+            });
+            // Mostrar la imagen seleccionada
+            document.getElementById('img-etapa-' + etapa).classList.add('active');
+
+            // Resetear estilos de botones
+            document.querySelectorAll('.btn-etapa').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Resaltar botón seleccionado
+            document.getElementById('btn-etapa-' + etapa).classList.add('active');
+
+            // Cambiar texto con pequeño efecto de desvanecimiento
+            const textoContenedor = document.getElementById('texto-etapa');
+            textoContenedor.style.opacity = 0;
+            setTimeout(() => {
+                textoContenedor.innerHTML = textosEtapas[etapa];
+                textoContenedor.style.opacity = 1;
+            }, 300);
+        }
     </script>
 </body>
 </html>
