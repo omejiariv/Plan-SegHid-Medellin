@@ -454,26 +454,60 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 4: ASIGNACIÓN FINANCIERA (EXPANDIBLE) -->
     <section class="py-12 px-6 bg-white border-t border-slate-200">
         <div class="max-w-7xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
             <div class="bg-white rounded-3xl border border-slate-200 shadow-md section-container overflow-hidden">
-                <!-- Título Visible -->
                 <div class="p-6 md:p-10 cursor-pointer flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleSection('financiera')">
                     <div class="pr-6">
                         <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-3">Asignación Financiera Estratégica</h2>
                         <p class="text-lg text-slate-600 leading-relaxed">
-                            La inversión distrital no se diluye; se concentra estratégicamente aprovechando sinergias interinstitucionales.
+                            Desglose de inversión por programa. El presupuesto refleja la priorización de soluciones basadas en la naturaleza y la inteligencia territorial.
                         </p>
                     </div>
                     <i data-feather="chevron-down" id="chev-financiera" class="chevron text-emerald-600 w-10 h-10 flex-shrink-0"></i>
                 </div>
                 
-                <!-- Contenido Oculto -->
                 <div id="body-financiera" class="section-body px-6 md:px-10">
                     <div class="pt-8 border-t border-slate-200">
-                        <div class="bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-100">
-                            <img src="Presupuesto_Propuesta.png" alt="Diagrama Sankey de Presupuesto" class="w-full h-auto object-contain mix-blend-multiply">
+                        <div class="overflow-hidden rounded-2xl border border-slate-200 shadow-sm mb-12">
+                            <table class="w-full text-left bg-white">
+                                <thead class="bg-emerald-600 text-white uppercase text-xs font-bold tracking-wider">
+                                    <tr>
+                                        <th class="px-6 py-4">Programa Estratégico</th>
+                                        <th class="px-6 py-4 text-right">Inversión (Millones COP)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 text-slate-700">
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4 font-medium">1. Riberas y Conectividad Vital</td>
+                                        <td class="px-6 py-4 text-right">$4.500</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4 font-medium">2. Infraestructura Verde (SbN Urbana)</td>
+                                        <td class="px-6 py-4 text-right">$5.500</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4 font-medium">3. Inteligencia HidroTerritorial (SIHT-Med)</td>
+                                        <td class="px-6 py-4 text-right">$3.000</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4 font-medium">4. Gobernanza Territorial y Pactos</td>
+                                        <td class="px-6 py-4 text-right">$1.800</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4 font-medium">5. Cultura Ciudadana "Conectados por el Agua"</td>
+                                        <td class="px-6 py-4 text-right">$2.200</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4 font-medium">6. Valoración Integral de Serv. Ecosistémicos</td>
+                                        <td class="px-6 py-4 text-right">$2.000</td>
+                                    </tr>
+                                    <tr class="bg-emerald-50 text-emerald-900 font-black">
+                                        <td class="px-6 py-4">TOTAL INVERSIÓN ESTRATÉGICA</td>
+                                        <td class="px-6 py-4 text-right text-xl">$19.000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
