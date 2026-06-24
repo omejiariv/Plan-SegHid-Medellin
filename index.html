@@ -39,6 +39,8 @@
     .chevron { transition: transform 0.4s ease; }
     .chevron.expanded { transform: rotate(180deg); }
   </style>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body>
 
@@ -363,6 +365,13 @@
                     </div>
                   </div>
 
+                  <div class="bg-slate-900 p-6 rounded-2xl mb-8 shadow-inner">
+                    <h4 class="text-white font-bold text-lg mb-4 flex items-center"><i data-feather="map" class="w-5 h-5 mr-2 text-indigo-400"></i> Visor Geográfico de Vulnerabilidad</h4>
+                    <p class="text-slate-400 text-sm mb-4">Puntos críticos de infraestructura y abastecimiento en el Valle de Aburrá y cuencas abastecedoras externas.</p>
+                    
+                    <div id="mapa-vulnerabilidad" class="w-full h-[450px] rounded-xl overflow-hidden border border-slate-700"></div>
+                  </div>
+
                   <button onclick="toggleTable('tabla-3')" class="bg-emerald-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-emerald-700 transition mb-6 shadow-md"><i data-feather="table" class="inline w-4 h-4 mr-2"></i> Ver Metas e Indicadores</button>
                   <div id="tabla-3" class="hidden overflow-x-auto bg-slate-50 p-4 rounded-xl border border-slate-100 mb-6">
                     <img src="Metas_Indicadores_P3.png" alt="Metas e Indicadores" class="w-full h-auto mix-blend-multiply">
@@ -595,9 +604,23 @@
     }
 
     // 2. Lógica Acordeón Programas
+    // --- VARIABLES GLOBALES PARA EL MAPA ---
+    let mapaInicializado = false;
+    let map;
+
+    // 2. Lógica Acordeón Programas (ACTUALIZADA PARA EL MAPA)
     function toggleProg(id) {
       document.getElementById('prog-body-' + id).classList.toggle('expanded');
       document.getElementById('chev-' + id).classList.toggle('expanded');
+      
+      // Si el directivo abre el Programa 3, inicializamos y ajustamos el mapa
+      if (id === 3) {
+        initMap();
+        // Damos tiempo a la animación CSS para que el mapa calcule su tamaño exacto
+        setTimeout(() => {
+          if(map) map.resize();
+        }, 300);
+      }
     }
 
     // 3. Lógica Tablas Metas
@@ -620,6 +643,41 @@
       document.getElementById('val-escorrentia').className = 'text-2xl font-black ' + escen[valor].colorE;
       document.getElementById('val-regulacion').className = 'text-2xl font-black ' + escen[valor].colorR;
       document.getElementById('val-vulnerabilidad').className = 'text-2xl font-black ' + escen[valor].colorV;
+    }
+
+    // 5. INICIALIZAR MAPBOX (NUEVO)
+    function initMap() {
+      if(mapaInicializado) return;
+
+      mapboxgl.accessToken = 'TU_TOKEN_AQUI'; // <--- Recuerda pegar aquí tu token de Mapbox
+      
+      map = new mapboxgl.Map({
+        container: 'mapa-vulnerabilidad',
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center: [-75.56, 6.24], // Medellín
+        zoom: 9.5
+      });
+
+      // Marcador 1: Embalse La Fe (El Retiro)
+      new mapboxgl.Marker({ color: '#10b981' }) 
+        .setLngLat([-75.49, 6.16])
+        .setPopup(new mapboxgl.Popup().setHTML("<div class='text-slate-800 font-sans'><strong>Embalse La Fe</strong><br>Altitud: 2200 msnm<br>Estado: Operativo</div>"))
+        .addTo(map);
+
+      // Marcador 2: Embalse Piedras Blancas
+      new mapboxgl.Marker({ color: '#10b981' }) 
+        .setLngLat([-75.50, 6.28])
+        .setPopup(new mapboxgl.Popup().setHTML("<div class='text-slate-800 font-sans'><strong>Embalse Piedras Blancas</strong><br>Altitud: 2400 msnm<br>Estado: Operativo</div>"))
+        .addTo(map);
+
+      // Marcador 3: Relleno Sanitario La Pradera
+      new mapboxgl.Marker({ color: '#ef4444' }) 
+        .setLngLat([-75.33, 6.45])
+        .setPopup(new mapboxgl.Popup().setHTML("<div class='text-slate-800 font-sans'><strong>Relleno La Pradera</strong><br>Altitud: 1000 msnm<br><span style='color:red; font-weight:bold;'>Vulnerabilidad: Crítica</span></div>"))
+        .addTo(map);
+
+      map.addControl(new mapboxgl.NavigationControl());
+      mapaInicializado = true;
     }
 
     window.onload = () => {
