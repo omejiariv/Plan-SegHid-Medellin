@@ -588,18 +588,38 @@
     AOS.init({ duration: 800, once: true, offset: 100 });
     feather.replace();
 
+    // 1. Lógica Acordeón Secciones
     function toggleSection(id) {
       document.getElementById('body-' + id).classList.toggle('expanded');
       document.getElementById('chev-' + id).classList.toggle('expanded');
     }
 
+    // 2. Lógica Acordeón Programas
     function toggleProg(id) {
       document.getElementById('prog-body-' + id).classList.toggle('expanded');
       document.getElementById('chev-' + id).classList.toggle('expanded');
     }
 
+    // 3. Lógica Tablas Metas
     function toggleTable(id) {
       document.getElementById(id).classList.toggle('hidden');
+    }
+
+    // 4. Lógica del Simulador (Programa 3)
+    function actualizarSimulador(valor) {
+      const escen = {
+        1: { e: 'Alta', r: 'Baja', v: 'Crítica', colorE: 'text-indigo-400', colorR: 'text-emerald-400', colorV: 'text-amber-400' },
+        2: { e: 'Media', r: 'Media', v: 'Moderada', colorE: 'text-indigo-300', colorR: 'text-emerald-300', colorV: 'text-amber-300' },
+        3: { e: 'Baja', r: 'Alta', v: 'Resiliente', colorE: 'text-indigo-200', colorR: 'text-emerald-200', colorV: 'text-green-400' }
+      };
+      
+      document.getElementById('val-escorrentia').innerText = escen[valor].e;
+      document.getElementById('val-regulacion').innerText = escen[valor].r;
+      document.getElementById('val-vulnerabilidad').innerText = escen[valor].v;
+      
+      document.getElementById('val-escorrentia').className = 'text-2xl font-black ' + escen[valor].colorE;
+      document.getElementById('val-regulacion').className = 'text-2xl font-black ' + escen[valor].colorR;
+      document.getElementById('val-vulnerabilidad').className = 'text-2xl font-black ' + escen[valor].colorV;
     }
 
     window.onload = () => {
@@ -608,6 +628,7 @@
       toggleProg(1);
     };
 
+    // 5. Lógica Visor Interactivo Río Chico
     const textosEtapas = {
       1: "<strong>Etapa 1 (Estado Degradado):</strong> Ausencia de bosque ripario. El suelo desnudo y la erosión aumentan la escorrentía superficial rápida, arrastrando sedimentos al cauce y disminuyendo drásticamente la infiltración y calidad del agua.",
       2: "<strong>Etapa 2 (Bosque Restaurado):</strong> La zona de ribera recupera su estructura ecológica. El dosel regula la temperatura del cauce, mientras el sistema radicular frena la escorrentía, actuando como una esponja que filtra contaminantes.",
@@ -629,6 +650,7 @@
       }, 600); 
     }
 
+    // 6. Lógica Visor de Riparios Automático
     let currentSlide = 0;
     const slides = document.querySelectorAll('.rip-slide');
     if(slides.length > 0) {
@@ -641,20 +663,3 @@
   </script>
 </body>
 </html>
-
-function actualizarSimulador(valor) {
-    const escen = {
-        1: { e: 'Alta', r: 'Baja', v: 'Crítica', colorE: 'text-indigo-400', colorR: 'text-emerald-400', colorV: 'text-amber-400' },
-        2: { e: 'Media', r: 'Media', v: 'Moderada', colorE: 'text-indigo-300', colorR: 'text-emerald-300', colorV: 'text-amber-300' },
-        3: { e: 'Baja', r: 'Alta', v: 'Resiliente', colorE: 'text-indigo-200', colorR: 'text-emerald-200', colorV: 'text-green-400' }
-    };
-    
-    document.getElementById('val-escorrentia').innerText = escen[valor].e;
-    document.getElementById('val-regulacion').innerText = escen[valor].r;
-    document.getElementById('val-vulnerabilidad').innerText = escen[valor].v;
-    
-    // Actualiza colores dinámicamente
-    document.getElementById('val-escorrentia').className = 'text-2xl font-black ' + escen[valor].colorE;
-    document.getElementById('val-regulacion').className = 'text-2xl font-black ' + escen[valor].colorR;
-    document.getElementById('val-vulnerabilidad').className = 'text-2xl font-black ' + escen[valor].colorV;
-}
