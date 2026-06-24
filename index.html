@@ -337,7 +337,7 @@
                     <div class="flex items-center">
                       <div class="bg-indigo-50 w-12 h-12 rounded-full flex items-center justify-center text-indigo-600 mr-4 flex-shrink-0"><i data-feather="cpu" class="w-5 h-5"></i></div>
                       <div>
-                        <h3 class="text-lg md:text-xl font-black text-slate-900">3. Inteligencia Hidroterritorial</h3>
+                        <h3 class="text-lg md:text-xl font-black text-slate-900">3. Inteligencia HidroTerritorial (SIHT-Med)</h3>
                         <p class="text-indigo-700 font-bold uppercase tracking-wide text-xs mt-1">Presupuesto: $3.000M COP</p>
                       </div>
                     </div>
@@ -351,6 +351,18 @@
                   <p class="text-slate-600 text-base mb-6 leading-relaxed border-t border-slate-100 pt-4">
                     El "cerebro analítico" (SIHT-Med). Integración de datos interinstitucionales y modelación predictiva para la toma de decisiones informadas.
                   </p>
+
+                  <div class="bg-slate-900 p-6 rounded-2xl mb-8 shadow-inner">
+                    <h4 class="text-white font-bold text-lg mb-4 flex items-center"><i data-feather="sliders" class="w-5 h-5 mr-2 text-indigo-400"></i> Explorador de Escenarios (SIHT-Med)</h4>
+                    <label class="block text-slate-400 text-sm mb-2">Selecciona el escenario de intervención:</label>
+                    <input type="range" min="1" max="3" value="1" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-500 mb-6" oninput="actualizarSimulador(this.value)">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center text-white">
+                      <div class="p-4 bg-slate-800 rounded-xl"><p class="text-xs uppercase text-slate-400">Escorrentía</p><h5 id="val-escorrentia" class="text-2xl font-black text-indigo-400">Alta</h5></div>
+                      <div class="p-4 bg-slate-800 rounded-xl"><p class="text-xs uppercase text-slate-400">Regulación</p><h5 id="val-regulacion" class="text-2xl font-black text-emerald-400">Baja</h5></div>
+                      <div class="p-4 bg-slate-800 rounded-xl"><p class="text-xs uppercase text-slate-400">Vulnerabilidad</p><h5 id="val-vulnerabilidad" class="text-2xl font-black text-amber-400">Crítica</h5></div>
+                    </div>
+                  </div>
+
                   <button onclick="toggleTable('tabla-3')" class="bg-emerald-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-emerald-700 transition mb-6 shadow-md"><i data-feather="table" class="inline w-4 h-4 mr-2"></i> Ver Metas e Indicadores</button>
                   <div id="tabla-3" class="hidden overflow-x-auto bg-slate-50 p-4 rounded-xl border border-slate-100 mb-6">
                     <img src="Metas_Indicadores_P3.png" alt="Metas e Indicadores" class="w-full h-auto mix-blend-multiply">
@@ -629,3 +641,20 @@
   </script>
 </body>
 </html>
+
+function actualizarSimulador(valor) {
+    const escen = {
+        1: { e: 'Alta', r: 'Baja', v: 'Crítica', colorE: 'text-indigo-400', colorR: 'text-emerald-400', colorV: 'text-amber-400' },
+        2: { e: 'Media', r: 'Media', v: 'Moderada', colorE: 'text-indigo-300', colorR: 'text-emerald-300', colorV: 'text-amber-300' },
+        3: { e: 'Baja', r: 'Alta', v: 'Resiliente', colorE: 'text-indigo-200', colorR: 'text-emerald-200', colorV: 'text-green-400' }
+    };
+    
+    document.getElementById('val-escorrentia').innerText = escen[valor].e;
+    document.getElementById('val-regulacion').innerText = escen[valor].r;
+    document.getElementById('val-vulnerabilidad').innerText = escen[valor].v;
+    
+    // Actualiza colores dinámicamente
+    document.getElementById('val-escorrentia').className = 'text-2xl font-black ' + escen[valor].colorE;
+    document.getElementById('val-regulacion').className = 'text-2xl font-black ' + escen[valor].colorR;
+    document.getElementById('val-vulnerabilidad').className = 'text-2xl font-black ' + escen[valor].colorV;
+}
