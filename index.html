@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan Estratégico de Seguridad Hídrica - Medellín 2026</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
+    <!-- AOS CSS (Animaciones al Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         body {
@@ -113,17 +118,15 @@
             transition: max-height 0.8s ease-in-out, opacity 0.5s ease-in-out, padding 0.5s ease;
         }
         .programa-body.expanded, .section-body.expanded {
-            max-height: 4000px; /* Alto suficiente para imágenes grandes */
+            max-height: 4000px;
             opacity: 1;
         }
-        /* Ajuste de padding cuando se expande */
         .section-body.expanded {
             padding-bottom: 2rem;
         }
         .programa-body.expanded {
             padding-bottom: 2.5rem;
         }
-        
         .chevron {
             transition: transform 0.4s ease;
         }
@@ -132,9 +135,10 @@
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased overflow-x-hidden">
 
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <!-- Navegación Institucional -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50" data-aos="fade-down" data-aos-duration="800">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-5">
                 <img src="CuencaVerde Logo.jpg" alt="CuencaVerde" class="h-12 object-contain">
@@ -149,21 +153,24 @@
         </div>
     </nav>
 
+    <!-- HERO SECTION -->
     <header class="hero-bg text-white py-32 px-6">
         <div class="max-w-6xl mx-auto">
-            <span class="text-emerald-400 font-bold tracking-widest uppercase text-sm mb-4 block">Propuesta Técnica y Estratégica</span>
-            <h1 class="text-5xl md:text-7xl font-black leading-tight mb-8">
+            <span class="text-emerald-400 font-bold tracking-widest uppercase text-sm mb-4 block" data-aos="fade-up">Propuesta Técnica y Estratégica</span>
+            <h1 class="text-5xl md:text-7xl font-black leading-tight mb-8" data-aos="fade-up" data-aos-delay="100">
                 Seguridad Hídrica y Resiliencia Territorial
             </h1>
-            <p class="text-xl md:text-2xl font-light text-slate-200 mb-10 max-w-3xl border-l-4 border-emerald-500 pl-6 leading-relaxed">
+            <p class="text-xl md:text-2xl font-light text-slate-200 mb-10 max-w-3xl border-l-4 border-emerald-500 pl-6 leading-relaxed" data-aos="fade-up" data-aos-delay="200">
                 El agua como eje fundamental del desarrollo integral sostenible para el Distrito de Medellín y su área metropolitana.
             </p>
         </div>
     </header>
 
+    <!-- SECCIÓN 1: EL CONTEXTO (EXPANDIBLE) -->
     <section class="py-12 px-6 bg-slate-50 border-b border-slate-200">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-7xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
             <div class="bg-white rounded-3xl border border-slate-200 shadow-md section-container overflow-hidden">
+                <!-- Título Visible -->
                 <div class="p-6 md:p-10 cursor-pointer flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleSection('realidad')">
                     <div class="pr-6">
                         <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-3">La Realidad Socioecológica</h2>
@@ -174,12 +181,14 @@
                     <i data-feather="chevron-down" id="chev-realidad" class="chevron text-emerald-600 w-10 h-10 flex-shrink-0"></i>
                 </div>
                 
+                <!-- Contenido Oculto -->
                 <div id="body-realidad" class="section-body px-6 md:px-10">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start pt-8 border-t border-slate-200">
                         <div>
                             <p class="text-lg text-slate-600 mb-8 leading-relaxed">
                                 A nivel global, la ONU advierte sobre la entrada a una era de <strong>"bancarrota hídrica"</strong>. Con la intensificación de fenómenos climáticos extremos, la inseguridad hídrica deja de ser un tema ambiental para convertirse en un riesgo económico primario.
                             </p>
+                            <!-- Mandato Normativo y Decreto 1449 -->
                             <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-sm">
                                 <h4 class="font-bold flex items-center mb-3 text-slate-900">
                                     <i data-feather="book-open" class="w-5 h-5 mr-3 text-emerald-600"></i> Mandato Normativo y de Financiación
@@ -193,6 +202,7 @@
                             </div>
                         </div>
                         
+                        <!-- VUELO ANIMADO (Imagen 8) -->
                         <div>
                             <div class="bg-emerald-900 text-emerald-100 text-xs font-bold px-3 py-2 rounded-t-xl text-center uppercase tracking-widest">
                                 Exploración Satelital: Interdependencias del Agua
@@ -207,9 +217,11 @@
         </div>
     </section>
 
+    <!-- SECCIÓN 2: LA CIENCIA DE LA RESTAURACIÓN (EXPANDIBLE) -->
     <section class="py-12 px-6 bg-slate-900 text-white border-t-8 border-emerald-600">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-7xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
             <div class="bg-slate-800 rounded-3xl border border-slate-700 shadow-xl section-container overflow-hidden">
+                <!-- Título Visible -->
                 <div class="p-6 md:p-10 cursor-pointer flex justify-between items-center hover:bg-slate-700/50 transition-colors" onclick="toggleSection('ciencia')">
                     <div class="pr-6">
                         <span class="inline-block bg-emerald-900 text-emerald-300 text-xs font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-4">Visor Pedagógico Interactivo</span>
@@ -221,8 +233,10 @@
                     <i data-feather="chevron-down" id="chev-ciencia" class="chevron text-emerald-400 w-10 h-10 flex-shrink-0"></i>
                 </div>
                 
+                <!-- Contenido Oculto -->
                 <div id="body-ciencia" class="section-body px-6 md:px-10">
                     <div class="pt-8 border-t border-slate-700">
+                        <!-- Botones de Control del Visor -->
                         <div class="flex flex-wrap justify-center gap-4 mb-8">
                             <button onclick="cambiarEtapa(1)" id="btn-etapa-1" class="btn-etapa active px-6 py-3 rounded-full border border-slate-600 text-slate-300 hover:border-emerald-500 hover:text-emerald-400 font-semibold focus:outline-none tracking-wide text-sm md:text-base">
                                 1. Estado Degradado
@@ -235,12 +249,14 @@
                             </button>
                         </div>
 
+                        <!-- Contenedor del Visor -->
                         <div class="restauracion-visor mb-6 max-w-5xl mx-auto">
                             <img src="SE Riparios 1.png" id="img-etapa-1" alt="Estado Degradado" class="restauracion-img active">
                             <img src="SE Riparios 2.png" id="img-etapa-2" alt="Bosque Restaurado" class="restauracion-img">
                             <img src="SE Riparios 3.png" id="img-etapa-3" alt="Comparativa de Impacto" class="restauracion-img">
                         </div>
 
+                        <!-- Texto Descriptivo Dinámico -->
                         <div class="bg-slate-900 p-6 md:p-8 rounded-2xl border border-slate-700 max-w-4xl mx-auto text-center min-h-[140px] flex items-center justify-center shadow-lg">
                             <p id="texto-etapa" class="text-lg text-slate-300 transition-opacity duration-700 leading-relaxed">
                                 <strong>Etapa 1 (Estado Degradado):</strong> Ausencia de bosque ripario. El suelo desnudo y la erosión aumentan la escorrentía superficial rápida, arrastrando sedimentos al cauce y disminuyendo drásticamente la infiltración y calidad del agua.
@@ -252,9 +268,11 @@
         </div>
     </section>
 
+    <!-- SECCIÓN 3: ESTRUCTURA PROGRAMÁTICA (EXPANDIBLE MAESTRO) -->
     <section class="py-12 px-6 bg-slate-50">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-7xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
             <div class="bg-white rounded-3xl border border-slate-200 shadow-md section-container overflow-hidden mb-6">
+                <!-- Título Visible -->
                 <div class="p-6 md:p-10 cursor-pointer flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleSection('estructura')">
                     <div class="pr-6">
                         <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-3">Estructura Programática Integrada</h2>
@@ -265,6 +283,7 @@
                     <i data-feather="chevron-down" id="chev-estructura" class="chevron text-emerald-600 w-10 h-10 flex-shrink-0"></i>
                 </div>
                 
+                <!-- Contenido Oculto -->
                 <div id="body-estructura" class="section-body px-6 md:px-10">
                     <div class="pt-8 border-t border-slate-200">
                         <div class="max-w-4xl mx-auto bg-slate-50 p-6 rounded-2xl border border-slate-100">
@@ -274,9 +293,11 @@
                 </div>
             </div>
             
+            <!-- ACORDEÓN INTERNO: LOS 6 PROGRAMAS -->
             <div class="max-w-5xl mx-auto space-y-4">
                 
-                <div class="bg-white rounded-2xl border-l-8 border-blue-500 programa-container shadow-sm border-y border-r border-slate-200">
+                <!-- Programa 1 -->
+                <div class="bg-white rounded-2xl border-l-8 border-blue-500 programa-container shadow-sm border-y border-r border-slate-200" data-aos="fade-up" data-aos-delay="100">
                     <div class="p-5 md:p-6 cursor-pointer flex justify-between items-center" onclick="toggleProg(1)">
                         <div class="flex items-center">
                             <div class="bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center text-blue-600 mr-4 flex-shrink-0">
@@ -293,13 +314,13 @@
                         <p class="text-slate-600 text-base mb-6 leading-relaxed border-t border-slate-100 pt-4">
                             Intervención en cuencas externas (ej. Río Grande y La Fe). Fortalecimiento de la estructura ecológica interviniendo bordes de ribera para mejorar la regulación hídrica.
                         </p>
+                        <!-- ANIMACIÓN AUTOMÁTICA RIPARIOS -->
                         <div class="mb-6">
                             <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-t-lg uppercase tracking-wider">Evolución de Restauración</span>
                             <div class="relative w-full h-48 md:h-80 rounded-xl rounded-tl-none overflow-hidden border border-blue-100 shadow-inner bg-slate-200">
-                                <img src="Rio Chico 1.png" class="rip-slide active" alt="Paso 1">
-                                <img src="Rio Chico 2.png" class="rip-slide" alt="Paso 2">
-                                <img src="Rio Chico 3.png" class="rip-slide" alt="Paso 3">
-                                <img src="Rio Chico 4.png" class="rip-slide" alt="Paso 4">
+                                <img src="Sin Bosques Riparios.png" class="rip-slide active" alt="Paso 1">
+                                <img src="SE Bosques Riparios 1.png" class="rip-slide" alt="Paso 2">
+                                <img src="SE Bosques Riparios 2.png" class="rip-slide" alt="Paso 3">
                             </div>
                         </div>
                         <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
@@ -308,7 +329,8 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl border-l-8 border-emerald-500 programa-container shadow-sm border-y border-r border-slate-200">
+                <!-- Programa 2 -->
+                <div class="bg-white rounded-2xl border-l-8 border-emerald-500 programa-container shadow-sm border-y border-r border-slate-200" data-aos="fade-up" data-aos-delay="150">
                     <div class="p-5 md:p-6 cursor-pointer flex justify-between items-center" onclick="toggleProg(2)">
                         <div class="flex items-center">
                             <div class="bg-emerald-50 w-12 h-12 rounded-full flex items-center justify-center text-emerald-600 mr-4 flex-shrink-0">
@@ -331,7 +353,8 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl border-l-8 border-indigo-500 programa-container shadow-sm border-y border-r border-slate-200">
+                <!-- Programa 3 -->
+                <div class="bg-white rounded-2xl border-l-8 border-indigo-500 programa-container shadow-sm border-y border-r border-slate-200" data-aos="fade-up" data-aos-delay="200">
                     <div class="p-5 md:p-6 cursor-pointer flex justify-between items-center" onclick="toggleProg(3)">
                         <div class="flex items-center">
                             <div class="bg-indigo-50 w-12 h-12 rounded-full flex items-center justify-center text-indigo-600 mr-4 flex-shrink-0">
@@ -354,7 +377,8 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl border-l-8 border-amber-500 programa-container shadow-sm border-y border-r border-slate-200">
+                <!-- Programa 4 -->
+                <div class="bg-white rounded-2xl border-l-8 border-amber-500 programa-container shadow-sm border-y border-r border-slate-200" data-aos="fade-up" data-aos-delay="250">
                     <div class="p-5 md:p-6 cursor-pointer flex justify-between items-center" onclick="toggleProg(4)">
                         <div class="flex items-center">
                             <div class="bg-amber-50 w-12 h-12 rounded-full flex items-center justify-center text-amber-600 mr-4 flex-shrink-0">
@@ -377,7 +401,8 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl border-l-8 border-teal-500 programa-container shadow-sm border-y border-r border-slate-200">
+                <!-- Programa 5 -->
+                <div class="bg-white rounded-2xl border-l-8 border-teal-500 programa-container shadow-sm border-y border-r border-slate-200" data-aos="fade-up" data-aos-delay="300">
                     <div class="p-5 md:p-6 cursor-pointer flex justify-between items-center" onclick="toggleProg(5)">
                         <div class="flex items-center">
                             <div class="bg-teal-50 w-12 h-12 rounded-full flex items-center justify-center text-teal-600 mr-4 flex-shrink-0">
@@ -400,7 +425,8 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl border-l-8 border-purple-500 programa-container shadow-sm border-y border-r border-slate-200">
+                <!-- Programa 6 -->
+                <div class="bg-white rounded-2xl border-l-8 border-purple-500 programa-container shadow-sm border-y border-r border-slate-200" data-aos="fade-up" data-aos-delay="350">
                     <div class="p-5 md:p-6 cursor-pointer flex justify-between items-center" onclick="toggleProg(6)">
                         <div class="flex items-center">
                             <div class="bg-purple-50 w-12 h-12 rounded-full flex items-center justify-center text-purple-600 mr-4 flex-shrink-0">
@@ -427,9 +453,11 @@
         </div>
     </section>
 
+    <!-- SECCIÓN 4: ASIGNACIÓN FINANCIERA (EXPANDIBLE) -->
     <section class="py-12 px-6 bg-white border-t border-slate-200">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-7xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
             <div class="bg-white rounded-3xl border border-slate-200 shadow-md section-container overflow-hidden">
+                <!-- Título Visible -->
                 <div class="p-6 md:p-10 cursor-pointer flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleSection('financiera')">
                     <div class="pr-6">
                         <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-3">Asignación Financiera Estratégica</h2>
@@ -440,6 +468,7 @@
                     <i data-feather="chevron-down" id="chev-financiera" class="chevron text-emerald-600 w-10 h-10 flex-shrink-0"></i>
                 </div>
                 
+                <!-- Contenido Oculto -->
                 <div id="body-financiera" class="section-body px-6 md:px-10">
                     <div class="pt-8 border-t border-slate-200">
                         <div class="bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-100">
@@ -451,10 +480,12 @@
         </div>
     </section>
 
+    <!-- SECCIÓN 5: ESCUELAS TALLER DEL AGUA (EXPANDIBLE) -->
     <section class="py-16 px-6 escuelas-bg text-white relative">
         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/90 to-slate-900/80"></div>
-        <div class="max-w-7xl mx-auto relative z-10">
+        <div class="max-w-7xl mx-auto relative z-10" data-aos="fade-up" data-aos-duration="1000">
             <div class="bg-slate-800/50 backdrop-blur-md rounded-3xl border border-white/20 shadow-2xl section-container overflow-hidden">
+                <!-- Título Visible -->
                 <div class="p-6 md:p-10 cursor-pointer flex justify-between items-center hover:bg-white/10 transition-colors" onclick="toggleSection('escuelas')">
                     <div class="pr-6">
                         <span class="inline-block bg-sky-600 text-white text-xs font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-4 shadow-lg">Metodología Innovadora</span>
@@ -466,21 +497,23 @@
                     <i data-feather="chevron-down" id="chev-escuelas" class="chevron text-white w-10 h-10 flex-shrink-0"></i>
                 </div>
                 
+                <!-- Contenido Oculto -->
                 <div id="body-escuelas" class="section-body px-6 md:px-10">
                     <div class="pt-8 border-t border-white/20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div class="bg-slate-900/70 p-8 rounded-2xl border border-white/10">
+                        <!-- Animación en cascada para cada tarjeta -->
+                        <div class="bg-slate-900/70 p-8 rounded-2xl border border-white/10" data-aos="fade-up" data-aos-delay="100">
                             <h4 class="text-xl font-bold text-emerald-400 mb-3 border-b border-white/20 pb-3">I. El Milagro del Agua</h4>
                             <p class="text-slate-300 text-sm leading-relaxed">Espíritu, Arte y Filosofía. Despertar el asombro mediante lecturas de paisaje y bitácoras de dibujo naturalista.</p>
                         </div>
-                        <div class="bg-slate-900/70 p-8 rounded-2xl border border-white/10">
+                        <div class="bg-slate-900/70 p-8 rounded-2xl border border-white/10" data-aos="fade-up" data-aos-delay="200">
                             <h4 class="text-xl font-bold text-emerald-400 mb-3 border-b border-white/20 pb-3">II. Anatomía del Territorio</h4>
                             <p class="text-slate-300 text-sm leading-relaxed">Geografía y Ecología. Entender la cuenca viva mediante mapeo comunitario e identificación de bioindicadores.</p>
                         </div>
-                        <div class="bg-slate-900/70 p-8 rounded-2xl border border-white/10">
+                        <div class="bg-slate-900/70 p-8 rounded-2xl border border-white/10" data-aos="fade-up" data-aos-delay="300">
                             <h4 class="text-xl font-bold text-emerald-400 mb-3 border-b border-white/20 pb-3">III. Ciencia Ciudadana</h4>
                             <p class="text-slate-300 text-sm leading-relaxed">Democratización de datos. Transición de la contemplación al monitoreo con medición de parámetros fisicoquímicos.</p>
                         </div>
-                        <div class="bg-slate-900/70 p-8 rounded-2xl border border-white/10">
+                        <div class="bg-slate-900/70 p-8 rounded-2xl border border-white/10" data-aos="fade-up" data-aos-delay="400">
                             <h4 class="text-xl font-bold text-emerald-400 mb-3 border-b border-white/20 pb-3">IV. Habitabilidad y Acción</h4>
                             <p class="text-slate-300 text-sm leading-relaxed">Resiliencia a través de soluciones reales: cosecha de agua, restauración de riberas y economía circular.</p>
                         </div>
@@ -492,7 +525,7 @@
 
     <!-- SECCIÓN 6: GOBERNANZA Y CIERRE (EXPANDIBLE) -->
     <section class="py-12 px-6 bg-white border-t border-slate-200">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-7xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
             <div class="bg-white rounded-3xl border border-slate-200 shadow-md section-container overflow-hidden">
                 <!-- Título Visible -->
                 <div class="p-6 md:p-10 cursor-pointer flex justify-between items-center hover:bg-slate-50 transition-colors" onclick="toggleSection('gobernanza')">
@@ -527,12 +560,23 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="bg-slate-900 py-10 text-center">
         <img src="CuencaVerde Logo.jpg" alt="CuencaVerde Logo" class="h-10 object-contain mx-auto mb-4 grayscale brightness-200 opacity-50">
         <p class="text-slate-500 text-sm font-medium tracking-wide">© 2026 Corporación CuencaVerde - Distrito de Medellín.</p>
     </footer>
 
+    <!-- SCRIPT CON TODA LA INTERACTIVIDAD -->
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Inicializar animaciones de entrada al hacer scroll
+        AOS.init({
+            duration: 800, // duración de la animación en milisegundos
+            once: true, // solo anima una vez al bajar
+            offset: 100 // desencadena la animación 100px antes de llegar al elemento
+        });
+
         // Inicializar Iconos
         feather.replace();
 
@@ -566,8 +610,8 @@
 
         // Abrir la primera sección maestra y el primer programa por defecto
         window.onload = () => {
-            toggleSection('realidad'); // Abre "La Realidad Socioecológica" por defecto
-            toggleProg(1); // Abre el Programa 1 por defecto
+            toggleSection('realidad');
+            toggleProg(1);
         };
 
         // 3. LÓGICA VISOR INTERACTIVO "LA CIENCIA DE LA RESTAURACIÓN"
@@ -578,15 +622,12 @@
         };
 
         function cambiarEtapa(etapa) {
-            // Animación de imágenes
             document.querySelectorAll('.restauracion-img').forEach(img => img.classList.remove('active'));
             document.getElementById('img-etapa-' + etapa).classList.add('active');
 
-            // Animación de botones
             document.querySelectorAll('.btn-etapa').forEach(btn => btn.classList.remove('active'));
             document.getElementById('btn-etapa-' + etapa).classList.add('active');
 
-            // Animación de texto
             const textoContenedor = document.getElementById('texto-etapa');
             textoContenedor.style.opacity = 0;
             setTimeout(() => {
