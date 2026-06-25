@@ -15,6 +15,8 @@
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 
   <style>
     body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; overflow-x: hidden; }
@@ -647,65 +649,90 @@
       document.getElementById('val-vulnerabilidad').className = 'text-2xl font-black ' + escen[valor].colorV;
     }
 
-    // 5. INICIALIZAR LEAFLET CON SATÉLITE Y MÚLTIPLES PUNTOS
+    // 5. INICIALIZAR LEAFLET CON SATÉLITE, LEYENDA Y PANTALLA COMPLETA
     function initMap() {
       if(mapaInicializado) return;
 
-      // Definición de las dos capas base
       const darkLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap &copy; CARTO',
-        subdomains: 'abcd',
-        maxZoom: 19
+        attribution: '&copy; OpenStreetMap &copy; CARTO', subdomains: 'abcd', maxZoom: 19
       });
 
       const satLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri',
-        maxZoom: 19
+        attribution: 'Tiles &copy; Esri', maxZoom: 19
       });
 
-      // Inicializar el mapa con la capa oscura por defecto y centrado en un punto medio de Antioquia
       map = L.map('mapa-vulnerabilidad', {
-        center: [6.4, -75.4],
+        center: [6.45, -75.40], // Centro ajustado para ver todo el sistema
         zoom: 8.5,
-        layers: [darkLayer]
+        layers: [darkLayer],
+        fullscreenControl: true // Activa el botón de pantalla completa
       });
 
-      // Agregar el control para alternar entre capas en la esquina superior derecha
-      const baseMaps = {
-        "Mapa Oscuro (Análisis)": darkLayer,
-        "Imagen Satelital (Terreno)": satLayer
-      };
-      L.control.layers(baseMaps).addTo(map);
+      // Control de capas
+      L.control.layers({"Mapa Oscuro (Análisis)": darkLayer, "Imagen Satelital (Terreno)": satLayer}).addTo(map);
 
-      // Definición de colores de Iconos
-      const iconBase = { shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] };
+      // Leyenda (Convenciones)
+      const legend = L.control({position: 'bottomright'});
+      legend.onAdd = function (map) {
+        const div = L.DomUtil.create('div', 'info legend bg-slate-900/90 p-4 rounded-xl border border-slate-700 text-white text-xs shadow-lg');
+        div.innerHTML = `
+          <h4 class='font-bold mb-3 text-sm border-b border-slate-600 pb-1'>Convenciones</h4>
+          <div class="flex items-center mb-1"><i style='background: #3b82f6; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px;'></i> Embalses</div>
+          <div class="flex items-center mb-1"><i style='background: #eab308; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px;'></i> Infraestructura (PTAP)</div>
+          <div class="flex items-center mb-1"><i style='background: #10b981; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px;'></i> Ecosistemas / Otros</div>
+          <div class="flex items-center"><i style='background: #ef4444; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px;'></i> Puntos Críticos</div>
+        `;
+        return div;
+      };
+      legend.addTo(map);
+
+      // Iconos reducidos a un tercio de su tamaño original [12, 20]
+      const iconBase = { shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', iconSize: [12, 20], iconAnchor: [6, 20], popupAnchor: [1, -16], shadowSize: [20, 20] };
       const greenIcon = new L.Icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png', ...iconBase });
       const redIcon = new L.Icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png', ...iconBase });
       const blueIcon = new L.Icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png', ...iconBase });
       const goldIcon = new L.Icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png', ...iconBase });
 
-      // ----- NODOS DE ABASTECIMIENTO Y REGULACIÓN (AZUL) -----
-      L.marker([6.1600, -75.4900], {icon: blueIcon}).addTo(map).bindPopup("<div class='text-slate-800 font-sans'><strong>Embalse La Fe</strong><br>Altitud: 2125 msnm<br>Altiplano Oriental</div>");
-      L.marker([6.2833, -75.5000], {icon: blueIcon}).addTo(map).bindPopup("<div class='text-slate-800 font-sans'><strong>Embalse Piedras Blancas</strong><br>Altitud: 2450 msnm<br>Filo Oriental</div>");
-      L.marker([6.5500, -75.4500], {icon: blueIcon}).addTo(map).bindPopup("<div class='text-slate-800 font-sans'><strong>Embalse Río Grande II</strong><br>Altitud: ~2200 msnm<br>Sistema Norte</div>");
-      L.marker([6.7500, -75.1400], {icon: blueIcon}).addTo(map).bindPopup("<div class='text-slate-800 font-sans'><strong>Embalse Porce II</strong><br>Altitud: ~900 msnm<br>Generación</div>");
-      L.marker([6.2667, -75.1667], {icon: blueIcon}).addTo(map).bindPopup("<div class='text-slate-800 font-sans'><strong>Embalse Guatapé Peñol</strong><br>Altitud: 1900 msnm<br>Regulación Oriental</div>");
-      L.marker([7.1333, -75.6667], {icon: blueIcon}).addTo(map).bindPopup("<div class='text-slate-800 font-sans'><strong>Embalse Hidroituango</strong><br>Altitud: 400 msnm<br>Cañón del Cauca</div>");
+      // ----- NODOS DE ABASTECIMIENTO (AZUL) -----
+      L.marker([6.136, -75.494], {icon: blueIcon}).addTo(map)
+        .bindTooltip("Embalse La Fe").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse La Fe</strong><br>Altitud: 2125 msnm</div>");
+      
+      L.marker([6.292, -75.498], {icon: blueIcon}).addTo(map)
+        .bindTooltip("Embalse Piedras Blancas").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Piedras Blancas</strong><br>Altitud: 2450 msnm</div>");
+      
+      L.marker([6.550, -75.462], {icon: blueIcon}).addTo(map)
+        .bindTooltip("Embalse Río Grande II").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Río Grande II</strong><br>Altitud: 2200 msnm</div>");
+      
+      L.marker([6.762, -75.133], {icon: blueIcon}).addTo(map)
+        .bindTooltip("Embalse Porce II").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Porce II</strong><br>Altitud: 900 msnm</div>");
+      
+      L.marker([6.262, -75.164], {icon: blueIcon}).addTo(map)
+        .bindTooltip("Embalse Guatapé Peñol").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Guatapé Peñol</strong><br>Altitud: 1900 msnm</div>");
+      
+      L.marker([7.142, -75.662], {icon: blueIcon}).addTo(map)
+        .bindTooltip("Embalse Hidroituango").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Hidroituango</strong><br>Altitud: 400 msnm</div>");
 
-      // ----- NODOS DE TRATAMIENTO (DORADO) -----
-      L.marker([6.1660, -75.5830], {icon: goldIcon}).addTo(map).bindPopup("<div class='text-slate-800 font-sans'><strong>PTAP Ayurá</strong><br>Altitud: ~1550 msnm<br>Tratamiento Sur</div>");
-      L.marker([6.3500, -75.5500], {icon: goldIcon}).addTo(map).bindPopup("<div class='text-slate-800 font-sans'><strong>PTAP Manantiales</strong><br>Altitud: ~1500 msnm<br>Tratamiento Norte</div>");
+      // ----- INFRAESTRUCTURAS PTAP (DORADO) -----
+      L.marker([6.171, -75.576], {icon: goldIcon}).addTo(map)
+        .bindTooltip("PTAP Ayurá").bindPopup("<div class='text-slate-800 text-sm'><strong>PTAP Ayurá</strong><br>Altitud: 1550 msnm</div>");
+      
+      L.marker([6.337, -75.541], {icon: goldIcon}).addTo(map)
+        .bindTooltip("PTAP Manantiales").bindPopup("<div class='text-slate-800 text-sm'><strong>PTAP Manantiales</strong><br>Altitud: 1600 msnm</div>");
 
-      // ----- ECOSISTEMAS Y EJES URBANOS (VERDE) -----
-      L.marker([6.6300, -75.6500], {icon: greenIcon}).addTo(map).bindPopup("<div class='text-slate-800 font-sans'><strong>Páramo de Santa Inés</strong><br>Altitud: ~3100 msnm<br>Ecosistema Estratégico</div>");
-      L.marker([6.2360, -75.5800], {icon: greenIcon}).addTo(map).bindPopup("<div class='text-slate-800 font-sans'><strong>Cerro Nutibara</strong><br>Altitud: 1560 msnm<br>Eje Urbano Central</div>");
+      // ----- ECOSISTEMAS Y OTROS (VERDE) -----
+      L.marker([6.633, -75.652], {icon: greenIcon}).addTo(map)
+        .bindTooltip("Páramo de Santa Inés").bindPopup("<div class='text-slate-800 text-sm'><strong>Páramo de Santa Inés (Belmira)</strong><br>Altitud: 3200 msnm</div>");
+      
+      L.marker([6.236, -75.580], {icon: greenIcon}).addTo(map)
+        .bindTooltip("Cerro Nutibara").bindPopup("<div class='text-slate-800 text-sm'><strong>Cerro Nutibara</strong><br>Altitud: 1486 msnm</div>");
 
       // ----- PUNTOS CRÍTICOS (ROJO) -----
-      L.marker([6.4700, -75.2700], {icon: redIcon}).addTo(map).bindPopup("<div class='text-slate-800 font-sans'><strong>Relleno La Pradera</strong><br>Altitud: 1000 msnm<br><span style='color:red; font-weight:bold;'>Vulnerabilidad: Crítica</span></div>");
+      // Nota: Altura corregida a 1000 msnm según tu indicación técnica
+      L.marker([6.467, -75.330], {icon: redIcon}).addTo(map)
+        .bindTooltip("Relleno La Pradera").bindPopup("<div class='text-slate-800 text-sm'><strong>Relleno La Pradera</strong><br>Altitud: 1000 msnm<br><span class='text-red-600 font-bold'>Vulnerabilidad: Crítica</span></div>");
 
       mapaInicializado = true;
     }
-
     window.onload = () => {
       toggleSection('realidad');
       toggleSection('estructura');
