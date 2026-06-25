@@ -745,28 +745,23 @@
 
       // 1. Inicio: Cerro Nutibara (Urbano)
       setTimeout(() => {
-        map.flyTo([6.236, -75.580], 13, { duration: 3 });
+        map.flyTo([6.236, -75.580], 13, { duration: 5 });
+      }, 100);
+
+      // 2. Subir al Embalse Río Grande II
+      setTimeout(() => {
+        map.flyTo([6.550, -75.462], 13, { duration: 5 });
       }, 500);
 
-      // 2. Vuelo al Páramo de Santa Inés
+      // 3. Vuelo al Páramo de Santa Inés
       setTimeout(() => {
-        map.flyTo([6.633, -75.652], 12, { duration: 4 });
-      }, 5000);
+        map.flyTo([6.633, -75.652], 12, { duration: 5 });
+      }, 200);
 
-      // 3. Descenso al Embalse Río Grande II
+      // 4. Retorno panorámico a la vista general
       setTimeout(() => {
-        map.flyTo([6.550, -75.462], 13, { duration: 3 });
-      }, 10000);
-
-      // 4. Salto topográfico a Hidroituango (Cañón del Cauca)
-      setTimeout(() => {
-        map.flyTo([7.142, -75.662], 11, { duration: 4 });
-      }, 14500);
-
-      // 5. Retorno panorámico a la vista general
-      setTimeout(() => {
-        map.flyTo([6.45, -75.40], 8.5, { duration: 4 });
-      }, 20500);
+        map.flyTo([6.45, -75.40], 8.5, { duration: 5 });
+      }, 100);
     }
 
     // 7. Lógica Visor Interactivo Río Chico
