@@ -373,9 +373,12 @@
                   </div>
 
                   <div class="bg-slate-900 p-6 rounded-2xl mb-8 shadow-inner">
-                    <h4 class="text-white font-bold text-lg mb-4 flex items-center"><i data-feather="map" class="w-5 h-5 mr-2 text-indigo-400"></i> Visor Geográfico de Vulnerabilidad</h4>
+                    <h4 class="text-white font-bold text-lg mb-2 flex items-center"><i data-feather="map" class="w-5 h-5 mr-2 text-indigo-400"></i> Visor Geográfico de Vulnerabilidad</h4>
                     <p class="text-slate-400 text-sm mb-4">Puntos críticos de infraestructura y abastecimiento en el Valle de Aburrá y cuencas abastecedoras externas.</p>
-                    
+                    <button onclick="iniciarVueloDron()" class="bg-indigo-600 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-indigo-500 transition mb-6 shadow-lg flex items-center">
+                      <i data-feather="navigation" class="w-4 h-4 mr-2"></i> Iniciar Vuelo Virtual (Dron)
+                    </button>
+  
                     <div id="mapa-vulnerabilidad" class="w-full h-[450px] rounded-xl overflow-hidden border border-slate-700"></div>
                   </div>
 
@@ -649,7 +652,7 @@
       document.getElementById('val-vulnerabilidad').className = 'text-2xl font-black ' + escen[valor].colorV;
     }
 
-    // 5. INICIALIZAR LEAFLET CON SATÉLITE, LEYENDA Y PANTALLA COMPLETA
+    // 5. INICIALIZAR LEAFLET (CON NUEVOS PUNTOS)
     function initMap() {
       if(mapaInicializado) return;
 
@@ -662,23 +665,21 @@
       });
 
       map = L.map('mapa-vulnerabilidad', {
-        center: [6.45, -75.40], // Centro ajustado para ver todo el sistema
+        center: [6.45, -75.40],
         zoom: 8.5,
         layers: [darkLayer],
-        fullscreenControl: true // Activa el botón de pantalla completa
+        fullscreenControl: true 
       });
 
-      // Control de capas
       L.control.layers({"Mapa Oscuro (Análisis)": darkLayer, "Imagen Satelital (Terreno)": satLayer}).addTo(map);
 
-      // Leyenda (Convenciones)
       const legend = L.control({position: 'bottomright'});
       legend.onAdd = function (map) {
         const div = L.DomUtil.create('div', 'info legend bg-slate-900/90 p-4 rounded-xl border border-slate-700 text-white text-xs shadow-lg');
         div.innerHTML = `
           <h4 class='font-bold mb-3 text-sm border-b border-slate-600 pb-1'>Convenciones</h4>
-          <div class="flex items-center mb-1"><i style='background: #3b82f6; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px;'></i> Embalses</div>
-          <div class="flex items-center mb-1"><i style='background: #eab308; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px;'></i> Infraestructura (PTAP)</div>
+          <div class="flex items-center mb-1"><i style='background: #3b82f6; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px;'></i> Embalses / Generación</div>
+          <div class="flex items-center mb-1"><i style='background: #eab308; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px;'></i> Infraestructura (PTAP/PTAR/Red)</div>
           <div class="flex items-center mb-1"><i style='background: #10b981; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px;'></i> Ecosistemas / Otros</div>
           <div class="flex items-center"><i style='background: #ef4444; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px;'></i> Puntos Críticos</div>
         `;
@@ -686,60 +687,89 @@
       };
       legend.addTo(map);
 
-      // Iconos reducidos a un tercio de su tamaño original [12, 20]
       const iconBase = { shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png', iconSize: [12, 20], iconAnchor: [6, 20], popupAnchor: [1, -16], shadowSize: [20, 20] };
       const greenIcon = new L.Icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png', ...iconBase });
       const redIcon = new L.Icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png', ...iconBase });
       const blueIcon = new L.Icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png', ...iconBase });
       const goldIcon = new L.Icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png', ...iconBase });
 
-      // ----- NODOS DE ABASTECIMIENTO (AZUL) -----
-      L.marker([6.136, -75.494], {icon: blueIcon}).addTo(map)
-        .bindTooltip("Embalse La Fe").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse La Fe</strong><br>Altitud: 2125 msnm</div>");
+      // ----- EMBALSES Y GENERACIÓN (AZUL) -----
+      L.marker([6.136, -75.494], {icon: blueIcon}).addTo(map).bindTooltip("Embalse La Fe").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse La Fe</strong><br>Altitud: 2125 msnm</div>");
+      L.marker([6.292, -75.498], {icon: blueIcon}).addTo(map).bindTooltip("Embalse Piedras Blancas").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Piedras Blancas</strong><br>Altitud: 2450 msnm</div>");
+      L.marker([6.550, -75.462], {icon: blueIcon}).addTo(map).bindTooltip("Embalse Río Grande II").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Río Grande II</strong><br>Altitud: 2200 msnm</div>");
+      L.marker([6.762, -75.133], {icon: blueIcon}).addTo(map).bindTooltip("Embalse Porce II").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Porce II</strong><br>Altitud: 900 msnm</div>");
+      L.marker([6.262, -75.164], {icon: blueIcon}).addTo(map).bindTooltip("Embalse Guatapé Peñol").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Guatapé Peñol</strong><br>Altitud: 1900 msnm</div>");
+      L.marker([7.142, -75.662], {icon: blueIcon}).addTo(map).bindTooltip("Embalse Hidroituango").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Hidroituango</strong><br>Altitud: 400 msnm</div>");
       
-      L.marker([6.292, -75.498], {icon: blueIcon}).addTo(map)
-        .bindTooltip("Embalse Piedras Blancas").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Piedras Blancas</strong><br>Altitud: 2450 msnm</div>");
-      
-      L.marker([6.550, -75.462], {icon: blueIcon}).addTo(map)
-        .bindTooltip("Embalse Río Grande II").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Río Grande II</strong><br>Altitud: 2200 msnm</div>");
-      
-      L.marker([6.762, -75.133], {icon: blueIcon}).addTo(map)
-        .bindTooltip("Embalse Porce II").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Porce II</strong><br>Altitud: 900 msnm</div>");
-      
-      L.marker([6.262, -75.164], {icon: blueIcon}).addTo(map)
-        .bindTooltip("Embalse Guatapé Peñol").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Guatapé Peñol</strong><br>Altitud: 1900 msnm</div>");
-      
-      L.marker([7.142, -75.662], {icon: blueIcon}).addTo(map)
-        .bindTooltip("Embalse Hidroituango").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Hidroituango</strong><br>Altitud: 400 msnm</div>");
+      // Nuevos Embalses
+      L.marker([6.210, -74.900], {icon: blueIcon}).addTo(map).bindTooltip("Embalse Punchiná").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Punchiná (San Carlos)</strong><br>Altitud: 780 msnm</div>");
+      L.marker([6.783, -75.216], {icon: blueIcon}).addTo(map).bindTooltip("Embalse Troneras").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Troneras (Guadalupe)</strong></div>");
+      L.marker([6.366, -75.050], {icon: blueIcon}).addTo(map).bindTooltip("Embalse San Lorenzo").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse San Lorenzo</strong></div>");
+      L.marker([6.333, -75.016], {icon: blueIcon}).addTo(map).bindTooltip("Central Jaguas").bindPopup("<div class='text-slate-800 text-sm'><strong>Central Jaguas</strong></div>");
+      L.marker([6.283, -75.050], {icon: blueIcon}).addTo(map).bindTooltip("Embalse Las Playas").bindPopup("<div class='text-slate-800 text-sm'><strong>Embalse Las Playas (San Rafael)</strong></div>");
 
-      // ----- INFRAESTRUCTURAS PTAP (DORADO) -----
-      L.marker([6.171, -75.576], {icon: goldIcon}).addTo(map)
-        .bindTooltip("PTAP Ayurá").bindPopup("<div class='text-slate-800 text-sm'><strong>PTAP Ayurá</strong><br>Altitud: 1550 msnm</div>");
+      // ----- INFRAESTRUCTURA (DORADO) -----
+      L.marker([6.171, -75.576], {icon: goldIcon}).addTo(map).bindTooltip("PTAP Ayurá").bindPopup("<div class='text-slate-800 text-sm'><strong>PTAP Ayurá</strong><br>Altitud: 1550 msnm</div>");
+      L.marker([6.337, -75.541], {icon: goldIcon}).addTo(map).bindTooltip("PTAP Manantiales").bindPopup("<div class='text-slate-800 text-sm'><strong>PTAP Manantiales</strong><br>Altitud: 1600 msnm</div>");
       
-      L.marker([6.337, -75.541], {icon: goldIcon}).addTo(map)
-        .bindTooltip("PTAP Manantiales").bindPopup("<div class='text-slate-800 text-sm'><strong>PTAP Manantiales</strong><br>Altitud: 1600 msnm</div>");
+      // Nuevas PTARs
+      L.marker([6.180, -75.610], {icon: goldIcon}).addTo(map).bindTooltip("PTAR San Fernando").bindPopup("<div class='text-slate-800 text-sm'><strong>PTAR San Fernando (Itagüí)</strong><br>Altitud: 1550 msnm</div>");
+      L.marker([6.340, -75.560], {icon: goldIcon}).addTo(map).bindTooltip("PTAR Aguas Claras").bindPopup("<div class='text-slate-800 text-sm'><strong>PTAR Aguas Claras (Bello)</strong><br>Altitud: 1450 msnm</div>");
+      
+      // Representación de Tanques y Bocatomas
+      L.marker([6.280, -75.442], {icon: goldIcon}).addTo(map).bindTooltip("Bocatoma La Honda").bindPopup("<div class='text-slate-800 text-sm'><strong>Bocatoma La Honda (Guarne)</strong><br>Captación estratégica</div>");
+      L.marker([6.255, -75.545], {icon: goldIcon}).addTo(map).bindTooltip("Tanque Pan de Azúcar").bindPopup("<div class='text-slate-800 text-sm'><strong>Tanque Pan de Azúcar</strong><br>Almacenamiento Valle de Aburrá</div>");
 
       // ----- ECOSISTEMAS Y OTROS (VERDE) -----
-      L.marker([6.633, -75.652], {icon: greenIcon}).addTo(map)
-        .bindTooltip("Páramo de Santa Inés").bindPopup("<div class='text-slate-800 text-sm'><strong>Páramo de Santa Inés (Belmira)</strong><br>Altitud: 3200 msnm</div>");
-      
-      L.marker([6.236, -75.580], {icon: greenIcon}).addTo(map)
-        .bindTooltip("Cerro Nutibara").bindPopup("<div class='text-slate-800 text-sm'><strong>Cerro Nutibara</strong><br>Altitud: 1486 msnm</div>");
+      L.marker([6.633, -75.652], {icon: greenIcon}).addTo(map).bindTooltip("Páramo de Santa Inés").bindPopup("<div class='text-slate-800 text-sm'><strong>Páramo de Santa Inés (Belmira)</strong><br>Altitud: 3200 msnm</div>");
+      L.marker([6.236, -75.580], {icon: greenIcon}).addTo(map).bindTooltip("Cerro Nutibara").bindPopup("<div class='text-slate-800 text-sm'><strong>Cerro Nutibara</strong><br>Altitud: 1486 msnm</div>");
 
       // ----- PUNTOS CRÍTICOS (ROJO) -----
-      // Nota: Altura corregida a 1000 msnm según tu indicación técnica
-      L.marker([6.467, -75.330], {icon: redIcon}).addTo(map)
-        .bindTooltip("Relleno La Pradera").bindPopup("<div class='text-slate-800 text-sm'><strong>Relleno La Pradera</strong><br>Altitud: 1000 msnm<br><span class='text-red-600 font-bold'>Vulnerabilidad: Crítica</span></div>");
+      L.marker([6.467, -75.330], {icon: redIcon}).addTo(map).bindTooltip("Relleno La Pradera").bindPopup("<div class='text-slate-800 text-sm'><strong>Relleno La Pradera</strong><br>Altitud: 1000 msnm<br><span class='text-red-600 font-bold'>Vulnerabilidad: Crítica</span></div>");
 
       mapaInicializado = true;
     }
+    
     window.onload = () => {
       toggleSection('realidad');
       toggleSection('estructura');
       toggleProg(1);
     };
 
-    // 6. Lógica Visor Interactivo Río Chico
+    // --- 6. FUNCIÓN DEL VUELO VIRTUAL TIPO DRON ---
+    function iniciarVueloDron() {
+      if(!map) return;
+      
+      // Hacemos scroll hacia el mapa para que el usuario no se pierda la animación
+      document.getElementById('mapa-vulnerabilidad').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      // 1. Inicio: Cerro Nutibara (Urbano)
+      setTimeout(() => {
+        map.flyTo([6.236, -75.580], 13, { duration: 3 });
+      }, 500);
+
+      // 2. Vuelo al Páramo de Santa Inés
+      setTimeout(() => {
+        map.flyTo([6.633, -75.652], 12, { duration: 4 });
+      }, 5000);
+
+      // 3. Descenso al Embalse Río Grande II
+      setTimeout(() => {
+        map.flyTo([6.550, -75.462], 13, { duration: 3 });
+      }, 10000);
+
+      // 4. Salto topográfico a Hidroituango (Cañón del Cauca)
+      setTimeout(() => {
+        map.flyTo([7.142, -75.662], 11, { duration: 4 });
+      }, 14500);
+
+      // 5. Retorno panorámico a la vista general
+      setTimeout(() => {
+        map.flyTo([6.45, -75.40], 8.5, { duration: 4 });
+      }, 20500);
+    }
+
+    // 7. Lógica Visor Interactivo Río Chico
     const textosEtapas = {
       1: "<strong>Etapa 1 (Estado Degradado):</strong> Ausencia de bosque ripario. El suelo desnudo y la erosión aumentan la escorrentía superficial rápida, arrastrando sedimentos al cauce y disminuyendo drásticamente la infiltración y calidad del agua.",
       2: "<strong>Etapa 2 (Bosque Restaurado):</strong> La zona de ribera recupera su estructura ecológica. El dosel regula la temperatura del cauce, mientras el sistema radicular frena la escorrentía, actuando como una esponja que filtra contaminantes.",
@@ -761,7 +791,7 @@
       }, 600); 
     }
 
-    // 7. Lógica Visor de Riparios Automático
+    // 8. Lógica Visor de Riparios Automático
     let currentSlide = 0;
     const slides = document.querySelectorAll('.rip-slide');
     if(slides.length > 0) {
